@@ -1,0 +1,74 @@
+{ pkgs, ... }:
+{
+  # stuff that wants to go system-wide on every device
+  # primarily, things that i want to be able to use as sudo
+  global-utils = with pkgs; [
+    coreutils
+    fmt
+    llvm 
+    cmake
+    fd
+    vim
+    neovim
+    autoconf
+    sqlite
+    gcc
+  ];
+
+  # desktop apps, specifically for nixos
+  desktop-software = with pkgs; [
+    prismlauncher
+    vesktop
+    firefox
+    ghostty
+    grimblast
+    wofi
+    wl-clipboard
+    hyprpaper
+
+  ];
+
+  kde-stuff = with pkgs.kdePackages; [
+    # file browser
+    dolphin
+
+    ## uncomment to enable network shares
+    # kio
+    # kio-fuse
+    # kio-extras
+
+    # svg icons
+    qtsvg
+  ];
+    
+
+  # userspace utilities on every device
+  user-global = with pkgs; [
+    # for nice looking zshrc
+    fastfetch
+
+    # useful utils
+    fd
+    ffmpeg
+    ripgrep
+
+    # random programs that i like having
+    cowsay
+    lolcat
+    toilet
+
+    # rust
+    rustc
+    cargo
+  ];
+
+  doom-emacs = with pkgs; [
+    emacs
+    rust-analyzer
+    shellcheck
+    tree-sitter
+    nil
+
+  ];
+
+}
