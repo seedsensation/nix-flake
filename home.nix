@@ -32,13 +32,11 @@
     emacs = {
       enable = true;
       package = (import ./modules/emacs.nix {inherit pkgs; });
-      extraConfig = builtins.readFile ./init.el;
     };
   };
 
-  home.file.".emacs.d/init.el" = {
-    source = ./init.el;
-  };
-  home.file.".emacs.d/modules/".source = config.lib.file.mkOutOfStoreSymlink ./modules/emacs;
+  home.packages = [(pkgs.writeShellScriptBin "eh"  "emacsclient -t $1")];
+
+  home.file.".emacs.d".source = config.lib.file.mkOutOfStoreSymlink ./modules/emacs.d;
 
 }

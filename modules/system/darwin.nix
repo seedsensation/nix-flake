@@ -3,7 +3,7 @@
   users.users.mercury = {
     name = "seedsensation";
     home = "/Users/seedsensation";
-    packages = with package-groups;
+    packages = 
       [(pkgs.writeShellScriptBin "rebuild-darwin" "sudo darwin-rebuild switch --flake ~/darwin")];
   };
 

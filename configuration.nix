@@ -3,7 +3,7 @@
 
 { inputs, config, lib, pkgs, nixpkgs, ... }:
 let
-  package-groups = import ./modules/system/package-groups.nix { inherit pkgs; };
+  package-groups = import ./packages.nix { inherit pkgs; };
 in
 {
   
@@ -45,7 +45,10 @@ in
   services.emacs = {
     enable = true;
     defaultEditor = true;
+    package = (import ./modules/emacs.nix {inherit pkgs;});
   };
+
+  fonts.packages = package-groups.fonts;
 
 
 

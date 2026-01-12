@@ -1,6 +1,6 @@
 {pkgs, inputs, ...}:
 let
-  package-groups = import ./package-groups.nix { inherit pkgs; };
+  package-groups = import ../../packages.nix { inherit pkgs; };
 in
 {
   users.users.mercury = {
@@ -44,6 +44,7 @@ in
 
   services.pipewire = {
     enable = true;
+    alsa.enable = true;
     pulse.enable = true;
   };
 
