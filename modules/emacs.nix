@@ -6,7 +6,7 @@ in
 emacsWithPackages (epkgs: 
     (with epkgs.melpaStablePackages; [
       magit
-      zerodark-theme
+      gruvbox-theme
     ])
 
     ++
@@ -14,22 +14,19 @@ emacsWithPackages (epkgs:
     (with epkgs.melpaPackages; [
       evil
       nix-mode
+      vertico
+      consult
+      marginalia
+      lsp-mode
+      company
+      avy
     ])
 
     ++
 
     (with epkgs.elpaPackages; [
-      
+      devdocs     
     ])
 
 )
 
-#  programs.emacs = {
-#    enable = true;
-#    package = pkgs.emacs;
-#    extraPackages = epkgs: [
-#    ];
-#
-#    extraConfig = ../emacs; 
-#  };
-#}

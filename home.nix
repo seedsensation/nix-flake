@@ -36,4 +36,9 @@
     };
   };
 
+  home.file.".emacs.d/init.el" = {
+    source = ./init.el;
+  };
+  home.file.".emacs.d/modules/".source = config.lib.file.mkOutOfStoreSymlink ./modules/emacs;
+
 }
