@@ -20,6 +20,7 @@ emacsWithPackages (epkgs:
       lsp-mode
       company
       avy
+      emacs-everywhere
     ])
 
     ++

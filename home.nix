@@ -37,6 +37,6 @@
 
   home.packages = [(pkgs.writeShellScriptBin "eh"  "emacsclient -t $1")];
 
-  home.file.".emacs.d".source = config.lib.file.mkOutOfStoreSymlink ./modules/emacs.d;
+  home.file.".emacs.d".source = config.lib.file.mkOutOfStoreSymlink ./emacs.d;
 
 }
