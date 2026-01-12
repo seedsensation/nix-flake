@@ -1,2 +1,0 @@
-(load-file "packages.el")
-

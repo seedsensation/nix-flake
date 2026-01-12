@@ -31,7 +31,8 @@
     };
     emacs = {
       enable = true;
-      package = (import ./modules/emacs/packages.nix {inherit pkgs; });
+      package = (import ./modules/emacs.nix {inherit pkgs; });
+      extraConfig = builtins.readFile ./init.el;
     };
   };
 

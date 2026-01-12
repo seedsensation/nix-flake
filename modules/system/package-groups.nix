@@ -70,7 +70,7 @@
   ];
 
   emacs = with pkgs; [
-    emacs
+    #(import ../emacs/emacs.nix { inherit pkgs; })
     rust-analyzer
     shellcheck
     tree-sitter
