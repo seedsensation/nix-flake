@@ -35,7 +35,8 @@
     hyprland,
     hyprland-plugins,
     hy3
-  }: let
+  }: 
+  let
     globalModules = [
       {
         system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -44,7 +45,7 @@
 	home-manager.useUserPackages = true;
       }
       ./configuration.nix
-      ];
+    ];
 
     nixosModules = [
       home-manager.nixosModules.home-manager
@@ -76,9 +77,7 @@
     # SYSTEM CONFIG
     nixosConfigurations.biggest-baby = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
-      modules = 
-        globalModules ++ 
-	nixosModules ++
+      modules = globalModules ++ nixosModules ++
         [ 
           ./modules/system/enable-ssh.nix
           ./hardware/biggest-baby.nix
@@ -89,12 +88,10 @@
     # SYSTEM CONFIG
     nixosConfigurations.slowest-baby = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
-      modules = 
-        globalModules ++ 
-	nixosModules ++
+      modules = globalModules ++ nixosModules ++
         [ 
 	  ## TODO: Replace with this laptop's hardware-config.nix
-          #./hardware/biggest-baby.nix
+          #./hardware/slowest-baby.nix
         ];
     };
     
