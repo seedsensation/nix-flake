@@ -41,6 +41,11 @@ in
 
   users.users.mercury.packages = package-groups.emacs;
 
+  services.emacs = {
+    enable = true;
+    defaultEditor = true;
+  };
+
 
 
   # Please do not touch this without considering the ramifications!!!
