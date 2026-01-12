@@ -1,5 +1,12 @@
 { config, pkgs, ... }:
+
 {
+  home.stateVersion = "25.11";
+  programs.home-manager.enable = true;
+  home.sessionVariables = {
+    EDITOR = "emacsclient";
+  };
+
   programs = {
     # better search
     fzf = {
@@ -20,5 +27,5 @@
       };
     };
   };
+
 }
-      	

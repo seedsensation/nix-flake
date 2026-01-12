@@ -54,6 +54,7 @@
     fd
     ffmpeg
     ripgrep
+    tmux
 
     # random programs that i like having
     cowsay
@@ -65,7 +66,7 @@
     cargo
   ];
 
-  doom-emacs = with pkgs; [
+  emacs = with pkgs; [
     emacs
     rust-analyzer
     shellcheck

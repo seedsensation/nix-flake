@@ -30,4 +30,12 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  networking = {
+    hostName = "biggest-baby";
+    interfaces = {
+      enp4s0.wakeOnLan.enable = true;
+      wlp0s20f3.useDHCP = true;
+    };
+  };
 }
