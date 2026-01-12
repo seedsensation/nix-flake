@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ 
+    ./modules/emacs/emacs.nix
+  ];
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
 
