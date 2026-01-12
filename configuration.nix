@@ -39,7 +39,8 @@ in
   environment.systemPackages = with package-groups;
     global-utils;
 
-  users.users.mercury.packages = package-groups.emacs;
+  users.users.mercury.packages = with package-groups;
+    emacs ++ user-global;
 
   services.emacs = {
     enable = true;

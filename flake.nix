@@ -46,6 +46,25 @@
       ./configuration.nix
       ];
 
+    nixosModules = [
+      home-manager.nixosModules.home-manager
+      ./modules/system/home-manager-config.nix
+      ./modules/system/nixos.nix
+
+      { 
+        home-manager.users.mercury = {inputs, ...}: {
+          imports = [
+            inputs.hyprland.homeManagerModules.default
+            ./modules/home/hyprland.nix
+          ] ++ homeModules;
+        };
+        home-manager.extraSpecialArgs = {
+          inherit inputs;
+        };
+      }
+
+    ];
+
     homeModules = [
       ./home.nix
       {home.file.".hushlogin".text = "";}
@@ -59,23 +78,10 @@
       specialArgs = {inherit inputs;};
       modules = 
         globalModules ++ 
+	nixosModules ++
         [ 
-          home-manager.nixosModules.home-manager
-          ./modules/system/home-manager-config.nix
-          ./modules/system/nixos.nix
           ./modules/system/enable-ssh.nix
           ./hardware/biggest-baby.nix
-          { 
-            home-manager.users.mercury = {inputs, ...}: {
-              imports = [
-                inputs.hyprland.homeManagerModules.default
-        	./modules/home/hyprland.nix
-              ] ++ homeModules;
-            };
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-            };
-          }
         ];
     };
 
@@ -85,23 +91,10 @@
       specialArgs = {inherit inputs;};
       modules = 
         globalModules ++ 
+	nixosModules ++
         [ 
-          home-manager.nixosModules.home-manager
-          ./modules/system/home-manager-config.nix
-          ./modules/system/nixos.nix
 	  ## TODO: Replace with this laptop's hardware-config.nix
           #./hardware/biggest-baby.nix
-          { 
-            home-manager.users.mercury = {inputs, ...}: {
-              imports = [
-                inputs.hyprland.homeManagerModules.default
-        	./modules/home/hyprland.nix
-              ] ++ homeModules;
-            };
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-            };
-          }
         ];
     };
     

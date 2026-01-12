@@ -13,6 +13,9 @@
     autoconf
     sqlite
     gcc
+  ];
+
+  ssh-utils = with pkgs; [
     google-authenticator
   ];
 

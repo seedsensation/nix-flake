@@ -4,11 +4,7 @@
     name = "seedsensation";
     home = "/Users/seedsensation";
     packages = with package-groups;
-      user-global ++
-
-      [ 
-        (pkgs.writeShellScriptBin "rebuild-darwin" "sudo darwin-rebuild switch --flake ~/darwin") 
-      ];
+      [(pkgs.writeShellScriptBin "rebuild-darwin" "sudo darwin-rebuild switch --flake ~/darwin")];
   };
 
   system.stateVersion = 6;

@@ -1,5 +1,10 @@
 {pkgs, ...}:
+let
+  package-groups = import ./package-groups.nix { inherit pkgs; };
+in
 {
+  environment.systemPackages = package-groups.ssh-utils;
+
   services.openssh = {
     enable = true;
     settings = {
