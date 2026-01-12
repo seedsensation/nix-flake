@@ -1,0 +1,28 @@
+viour
+** Package Management
+*** Emacs Package Repositories
+#+begin_src emacs-lisp 
+(require 'package)
+  (setq package-archives
+    '(("melpa" . "https://melpa.org/packages/")
+    ("elp" . "https://elpa.gnu.org/packages/")
+    ("gnu-devel" . "https://elpa.gnu.org/devel/")
+    ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+    ))
+#+end_src
+*** Package config tool (=use-package=)
+**** Package installation
+- Auto install all packages called by =use-package=
+#+begin_src emacs-lisp 
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+#+end_src
+**** Package update
+- Keep packages called by =use-package= automatically updated
+#+begin_src emacs-lisp 
+(use-package auto-package-update
+:config
+(setq auto-package-update-delete-old-versions t)
+(setq auto-package-update-hide-results t)
+(auto-package-update-maybe))
+#+end_src

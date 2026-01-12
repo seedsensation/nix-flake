@@ -2,7 +2,6 @@
 
 {
   imports = [ 
-    ./modules/emacs/emacs.nix
   ];
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
@@ -29,6 +28,10 @@
       	enable = true;
 	theme = "jonathan";
       };
+    };
+    emacs = {
+      enable = true;
+      package = (import ./modules/emacs/packages.nix {inherit pkgs; });
     };
   };
 
