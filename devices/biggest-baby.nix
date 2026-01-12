@@ -31,14 +31,26 @@ in
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  
+
+
+  
+
+
 
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
+
   programs.zsh.enable = true;
 
+
+  programs.firefox.preferences = {
+      "browser.startup.homepage" = "https://en.wikipedia.org/wiki/Special:Random";
+      "privacy.resistFingerprinting" = true;
+    };
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.open = false;
@@ -46,11 +58,18 @@ in
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.timeout = 2;
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "biggest-baby"; # Define your hostname.
+  networking = {
+    hostName = "biggest-baby";
+    interfaces = {
+      enp4s0.wakeOnLan.enable = true;
+      wlp0s20f3.useDHCP = true;
+    };
+  };
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
@@ -136,12 +155,34 @@ in
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+      PermitRootLogin = "no";
+      KbdInteractiveAuthentication = true;
+    };
+
+    #listenAddresses = [
+    #  {
+    #    addr = "192.168.0.44";
+    #    port = 22;
+    #  }
+    #  {
+    #    addr = "192.168.0.55";
+    #    port = 22;
+    #  }
+    #];
+  };
+
+  security.pam.services.sshd.googleAuthenticator.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 
 	22
+	25522
   ];
+  networking.firewall.allowedUDPPorts = [ 9 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

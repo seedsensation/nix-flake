@@ -13,6 +13,7 @@
     autoconf
     sqlite
     gcc
+    google-authenticator
   ];
 
   # desktop apps, specifically for nixos
@@ -21,10 +22,12 @@
     vesktop
     firefox
     ghostty
-    grimblast
     wofi
     wl-clipboard
     hyprpaper
+    steam
+    grim
+    slurp
 
   ];
 
