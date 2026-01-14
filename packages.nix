@@ -28,13 +28,13 @@
     ghostty
     wofi
     wl-clipboard
-    steam
     grim
     slurp
     flameshot
     hyprpaper
     playerctl
     brightnessctl
+    wtype
   ];
 
   fonts = with pkgs; [

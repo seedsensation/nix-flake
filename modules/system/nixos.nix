@@ -10,12 +10,12 @@ in
     shell = pkgs.zsh;
     extraGroups = ["wheel"];
     packages = with package-groups; 
-      desktop-software ++
-      kde-stuff ++
-      [
-        (pkgs.writeShellScriptBin "rebuild-nixos" "sudo nixos-rebuild switch")
-	(pkgs.writeShellScriptBin "reload-nixos" "sudo nixos-rebuild test")
-      ];
+    desktop-software ++
+    kde-stuff ++
+    [
+      (pkgs.writeShellScriptBin "rebuild-nixos" "sudo nixos-rebuild switch")
+	    (pkgs.writeShellScriptBin "reload-nixos" "sudo nixos-rebuild test")
+    ];
   };
   environment.pathsToLink = ["/share/applications" "/share/xdg-desktop-portal"];
 
@@ -27,18 +27,33 @@ in
   };
 
 
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  programs = {
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    };
+
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+    };
+
+    zsh.enable = true;
+
+    firefox.preferences = {
+      "browser.startup.homepage" = "https://en.wikipedia.org/wiki/Special:Random";
+      "privacy.resistFingerprinting" = true;
+    };
   };
 
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia.open = true;
+  hardware.nvidia.open = false;
 
   networking.networkmanager.enable = true;
-  
+
 
   services.printing.enable = true;
 
@@ -50,12 +65,7 @@ in
 
   services.libinput.enable = true;
 
-  programs.zsh.enable = true;
 
-  programs.firefox.preferences = {
-    "browser.startup.homepage" = "https://en.wikipedia.org/wiki/Special:Random";
-    "privacy.resistFingerprinting" = true;
-  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

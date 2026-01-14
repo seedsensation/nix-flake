@@ -1,8 +1,10 @@
 { config, pkgs, inputs, ... }:
 {
 
-  programs.waybar = {
-    enable = true;
+  programs = {
+    waybar = {
+      enable = true;
+    };
   };
 
   services.hyprpaper = {
@@ -24,7 +26,7 @@
   #home.file.".scripts".source = ../scripts;
 
   home.file.".wallpapers".source = config.lib.file.mkOutOfStoreSymlink ../.wallpapers;
-  
+
 
 
   home.pointerCursor = {
@@ -211,6 +213,8 @@
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
+        "$mainMod, w, exec, emacsclient --eval '(thanos/type)'"
+
 
 
       ] ++ (
@@ -231,6 +235,11 @@
 	        name = "emacs";
 	        opacity = 0.9;
 	      }
+        {
+          name = "emacs-float";
+          "match:title" = "emacs-float";
+          float = true;
+        }
 	      {
 	        name = "ghostty";
 	        opacity = 0.9;
