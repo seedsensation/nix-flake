@@ -41,22 +41,25 @@
       {
         system.configurationRevision = self.rev or self.dirtyRev or null;
         nix.settings.experimental-features = ["nix-command" "flakes"];
-	      home-manager.useGlobalPkgs = true;
-	      home-manager.useUserPackages = true;
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          users.mercury = ./home.nix;
+          backupFileExtension = ".bak";
+        };
       }
       ./configuration.nix
     ];
 
     nixosModules = [
       home-manager.nixosModules.home-manager
-      ./modules/system/home-manager-config.nix
-      ./modules/system/nixos.nix
+      ./devices/nixos.nix
 
       { 
       home-manager.users.mercury = {inputs, ...}: {
         imports = [
           inputs.hyprland.homeManagerModules.default
-          ./modules/nixos-home.nix
+          ./modules/desktop.nix
         ] ++ homeModules;
       };
       home-manager.extraSpecialArgs = {
@@ -79,8 +82,8 @@
       specialArgs = {inherit inputs;};
       modules = globalModules ++ nixosModules ++
       [ 
-      ./modules/system/enable-ssh.nix
-      ./hardware/biggest-baby.nix
+      ./modules/enable-ssh.nix
+      ./devices/biggest-baby.nix
       ];
     };
 

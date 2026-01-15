@@ -1,6 +1,6 @@
 {pkgs, inputs, ...}:
 let
-  package-groups = import ../../packages.nix { inherit pkgs; };
+  package-groups = import ../packages.nix { inherit pkgs; };
 in
 {
   users.users.mercury = {
@@ -14,7 +14,9 @@ in
     kde-stuff ++
     [
       (pkgs.writeShellScriptBin "rebuild-nixos" "sudo nixos-rebuild switch")
+
 	    (pkgs.writeShellScriptBin "reload-nixos" "sudo nixos-rebuild test")
+	    (pkgs.writeShellScriptBin "reload-nixos-trace" "sudo nixos-rebuild test --show-trace")
     ];
   };
   environment.pathsToLink = ["/share/applications" "/share/xdg-desktop-portal"];

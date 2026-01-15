@@ -33,9 +33,9 @@
 		     ))
 
 (defvar config-map (define-keymap :full t
-		     "r" (lambda () (interactive) (load "~/nixos/emacs.d/init.el"))
+		     "r" (lambda () (interactive) (load "~/nixos/modules/emacs/init.el"))
 		     "h" (lambda () (interactive) (find-file "~/org/home.org"))
-		     "c" (lambda () (interactive) (find-file "~/nixos/emacs.d/init.el"))
+		     "c" (lambda () (interactive) (find-file "~/nixos/modules/emacs/init.el"))
 
 		     ))
 
@@ -67,8 +67,12 @@
 (add-hook 'text-mode-hook (lambda ()
 	    (visual-line-mode)
 	    (org-indent-mode)
-	    (toggle-truncate-lines)    
 	    ))
+
+(add-hook 'prog-mode-hook (lambda ()
+			    (display-line-numbers-mode)
+			    (setq display-line-numbers 'relative
+			    )))
 
 
 ;; Set variables & configuration
@@ -78,12 +82,13 @@
 (toggle-truncate-lines 1)
 (evil-set-undo-system 'undo-redo)
 
-(defun show-line-numbers-relative ()
-  (interactive)
-  (display-line-numbers-mode)
-  (setq display-line-numbers 'relative))
-
-(add-hook 'prog-mode-hook 'show-line-numbers-relative)
+;;;; Setup for interacitve linen 
+;;(defun show-line-numbers-relative ()
+;;  (interactive)
+;;  (display-line-numbers-mode)
+;;  (setq display-line-numbers 'relative))
+;;
+;;(add-hook 'prog-mode-hook 'show-line-numbers-relative)
 
 (define-key evil-normal-state-map (kbd "<SPC>") leader-map)
 

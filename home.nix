@@ -37,8 +37,11 @@ in
     };
   };
 
-  home.packages = [(pkgs.writeShellScriptBin "eh"  "emacsclient -t $1")];
+  home.packages = [
+    (pkgs.writeShellScriptBin "eh"  "emacsclient -t $1")
+    (pkgs.writeShellScriptBin "edit-emacs" "eh ~/nixos/modules/emacs/init.el")
+  ];
 
-  home.file.".emacs.d".source = config.lib.file.mkOutOfStoreSymlink ./emacs.d;
+  home.file.".emacs.d".source = config.lib.file.mkOutOfStoreSymlink ./modules/emacs;
 
 }

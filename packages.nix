@@ -35,6 +35,7 @@
     playerctl
     brightnessctl
     wtype
+    spotify
   ];
 
   fonts = with pkgs; [
@@ -84,9 +85,11 @@
     tree-sitter
     nil
     tailwindcss-language-server
+    nixfmt
 
   ];
 
+  #### EMACS PACKAGES ####
   emacs = (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages ( epkgs:
   (with epkgs.melpaStablePackages; [
     magit
@@ -105,6 +108,7 @@
     company
     avy
     emacs-everywhere
+    surround
   ])
 
   ++
