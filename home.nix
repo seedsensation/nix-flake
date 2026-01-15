@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
-
+let
+  package-groups = import ./packages.nix { inherit pkgs; };
+in
 {
   imports = [ 
   ];
@@ -31,7 +33,7 @@
     };
     emacs = {
       enable = true;
-      package = (import ./modules/emacs.nix {inherit pkgs; });
+      package = package-groups.emacs;
     };
   };
 

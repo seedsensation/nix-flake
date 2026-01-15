@@ -27,6 +27,8 @@
 
   home.file.".wallpapers".source = config.lib.file.mkOutOfStoreSymlink ../.wallpapers;
 
+  xdg.configFile."emacs".source = ../emacs.d;
+
 
 
   home.pointerCursor = {

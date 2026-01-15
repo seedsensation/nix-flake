@@ -77,7 +77,7 @@
     cargo
   ];
 
-  emacs = with pkgs; [
+  emacs-deps = with pkgs; [
     #(import ../emacs/emacs.nix { inherit pkgs; })
     rust-analyzer
     shellcheck
@@ -86,5 +86,33 @@
     tailwindcss-language-server
 
   ];
+
+  emacs = (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages ( epkgs:
+  (with epkgs.melpaStablePackages; [
+    magit
+    gruvbox-theme
+  ])
+
+  ++
+
+  (with epkgs.melpaPackages; [
+    evil
+    nix-mode
+    vertico
+    consult
+    marginalia
+    lsp-mode
+    company
+    avy
+    emacs-everywhere
+  ])
+
+  ++
+
+  (with epkgs.elpaPackages; [
+    devdocs     
+  ])
+
+  );
 
 }

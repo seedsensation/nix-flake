@@ -40,12 +40,13 @@ in
     global-utils;
 
   users.users.mercury.packages = with package-groups;
-    emacs ++ user-global;
+    emacs-deps ++ user-global;
 
   services.emacs = {
     enable = true;
     defaultEditor = true;
-    package = (import ./modules/emacs.nix {inherit pkgs;});
+    package = package-groups.emacs;
+
   };
 
   fonts.packages = package-groups.fonts;
