@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 let
   package-groups = import ./packages.nix { inherit pkgs; };
 in
@@ -50,5 +50,7 @@ in
 
   home.file.".emacs.d".source = config.lib.file.mkOutOfStoreSymlink ./emacs;
   xdg.configFile."emacs".source = ./emacs;
+
+  home.file."test".source = config.lib.file.mkOutOfStoreSymlink inputs.emacs-flake.packages.${system}.emacs-flake;
 
 }

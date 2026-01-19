@@ -26,6 +26,11 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    emacs-flake = {
+      url = "github:seedsensation/emacs-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
   outputs = inputs@{
     self,
@@ -34,7 +39,8 @@
     darwin,
     hyprland,
     hyprland-plugins,
-    hy3
+      hy3,
+      emacs-flake,
   }: 
   let
     globalModules = [
