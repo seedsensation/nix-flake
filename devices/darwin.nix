@@ -1,10 +1,12 @@
 { pkgs, ... }:
+let
+  package-groups = import ../packages.nix { inherit pkgs; };
+in
 {
   users.users.mercury = {
     name = "seedsensation";
     home = "/Users/seedsensation";
-    packages = 
-      [(pkgs.writeShellScriptBin "rebuild-darwin" "sudo darwin-rebuild switch --flake ~/darwin")];
+    packages = package-groups.darwin-scripts;
   };
 
   system.stateVersion = 6;

@@ -3,17 +3,22 @@
   # stuff that wants to go system-wide on every device
   # primarily, things that i want to be able to use as sudo
   global-utils = with pkgs; [
-    coreutils
-    fmt
-    llvm 
-    cmake
-    fd
-    vim
-    neovim
     autoconf
-    sqlite
-    gcc
     busybox
+    cmake
+    cmatrix
+    coreutils
+    fd
+    fmt
+    freetype
+    gcc
+    gd
+    gnumake
+    llvm 
+    neovim
+    sqlite
+    vim
+    python3
   ];
 
   ssh-utils = with pkgs; [
@@ -22,20 +27,21 @@
 
   # desktop apps, specifically for nixos
   desktop-software = with pkgs; [
-    prismlauncher
-    vesktop
+    brightnessctl
     firefox
-    ghostty
-    wofi
-    wl-clipboard
-    grim
-    slurp
     flameshot
+    ghostty
+    grim
     hyprpaper
     playerctl
-    brightnessctl
-    wtype
+    prismlauncher
+    slurp
     spotify
+    vesktop
+    wl-clipboard
+    wofi
+    wtype
+    qpwgraph
   ];
 
   fonts = with pkgs; [
@@ -86,7 +92,18 @@
     nil
     tailwindcss-language-server
     nixfmt
+    sqlite
 
+    # LaTeX Packages
+    (texliveBasic.withPackages (
+      ps: with ps; [
+        dvisvgm dvipng
+        wrapfig amsmath
+        ulem hyperref
+        capt-of
+        #(setq org-latex-compiler "lualatex")
+        #(setq org-preview-latex-default-process 'dvisvgm)
+      ]))
   ];
 
   #### EMACS PACKAGES ####
@@ -94,21 +111,29 @@
   (with epkgs.melpaStablePackages; [
     magit
     gruvbox-theme
+    org-fragtog
   ])
 
   ++
 
   (with epkgs.melpaPackages; [
-    evil
-    nix-mode
-    vertico
-    consult
-    marginalia
-    lsp-mode
-    company
     avy
+    company
+    consult
+    dash
     emacs-everywhere
+    evil
+    f
+    ivy
+    ivy-prescient
+    magit-section
+    marginalia
+    nix-mode
+    orderless
+    simple-httpd
     surround
+    vertico
+    websocket
   ])
 
   ++
@@ -117,6 +142,32 @@
     devdocs     
   ])
 
+  ++ (with epkgs; [
+    org
+    org-roam
+    org-roam-ui
+    org-roam-timestamps
+    sqlite3
+    lsp-mode
+  ])
+
+
+
   );
 
+  nixos-scripts = [
+    (pkgs.writeShellScriptBin "rebuild-nixos" "sudo nixos-rebuild switch")
+	  (pkgs.writeShellScriptBin "reload-nixos" "sudo nixos-rebuild test")
+	  (pkgs.writeShellScriptBin "reload-emacs" "sudo nixos-rebuild test && systemctl restart emacs --user")
+	  (pkgs.writeShellScriptBin "reload-nixos-trace" "sudo nixos-rebuild test --show-trace")
+  ];
+
+  darwin-scripts = [
+    (pkgs.writeShellScriptBin "rebuild-darwin" "sudo darwin-rebuild switch --flake ~/darwin#darwin")
+  ];
+
+  global-scripts = [
+    (pkgs.writeShellScriptBin "speak" "toilet \"$1\" | cowsay -rn | lolcat")
+    (pkgs.writeShellScriptBin "actually" "toilet \"$1\" | cowsay -rf actually -n | lolcat")
+  ];
 }

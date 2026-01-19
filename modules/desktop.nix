@@ -52,7 +52,6 @@
       monitor = "DP-1,preferred,0x0,auto";
 
       exec-once = [
-        "$terminal"
 	      "waybar & hyprpaper"
 	      "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       ];

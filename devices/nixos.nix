@@ -3,6 +3,9 @@ let
   package-groups = import ../packages.nix { inherit pkgs; };
 in
 {
+
+  users.mutableUsers = true;
+  
   users.users.mercury = {
     isNormalUser = true;
     name = "mercury";
@@ -10,21 +13,18 @@ in
     shell = pkgs.zsh;
     extraGroups = ["wheel"];
     packages = with package-groups; 
-    desktop-software ++
-    kde-stuff ++
-    [
-      (pkgs.writeShellScriptBin "rebuild-nixos" "sudo nixos-rebuild switch")
-
-	    (pkgs.writeShellScriptBin "reload-nixos" "sudo nixos-rebuild test")
-	    (pkgs.writeShellScriptBin "reload-nixos-trace" "sudo nixos-rebuild test --show-trace")
-    ];
+      desktop-software ++
+      kde-stuff ++
+      nixos-scripts;
   };
   environment.pathsToLink = ["/share/applications" "/share/xdg-desktop-portal"];
 
   services.displayManager.ly = {
     enable = true;
     settings = {
-      animation = "doom";
+      animation = "gameoflife";
+      auto_login_session = "hyprland";
+      default_input = "login";
     };
   };
 

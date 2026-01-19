@@ -40,14 +40,22 @@ in
     global-utils;
 
   users.users.mercury.packages = with package-groups;
-    emacs-deps ++ user-global;
+    emacs-deps ++ user-global ++ global-scripts;
 
-  services.emacs = {
-    enable = true;
-    defaultEditor = true;
-    package = package-groups.emacs;
-
+  services = {
+    mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+    };
   };
+
+  
+  #services.emacs = {
+  #  enable = true;
+  #  defaultEditor = true;
+  #  package = package-groups.emacs;
+
+  #};
 
   fonts.packages = package-groups.fonts;
 

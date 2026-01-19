@@ -44,3 +44,5 @@
 		      "wtype" nil
 		      (thanos/wtype-text (buffer-string)))
 		     (delete-frame)))))
+
+(provide 'emacs-outside)

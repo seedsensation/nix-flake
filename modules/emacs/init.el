@@ -1,98 +1,91 @@
-;; Enable Vim Motions <3
-(evil-mode)
+;; Variables to Set
+;; If any of these variables break, the whole config
+;;   will fail to go through.
+(setq variable-configs 'go-here
 
-;; Enable themes
-(load-theme 'gruvbox t)
+      ;; Basic configs
+      custom-file "~/nixos/modules/emacs/modules/customizations.el"
+      display-line-numbers 'relative
+      ring-bell-function 'ignore
 
-;; Standard modes
+      ;; Org Mode Configs
+      org-latex-create-formula-image-program 'dvipng
+      org-preview-latex-default-process 'dvipng
+      org-roam-directory (file-truename "~/org")
+      org-id-locations-file (expand-file-name ".org-id-locations" org-roam-directory)
+      org-roam-db-location (expand-file-name "org-roam.db" org-roam-directory)
+      ;;org-roam-database-connector 'sqlite-builtin
+
+      ;; Completion Settings
+      read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t
+      completion-ignore-case t
+      completion-styles '(basic substring partial-completion flex)
+
+
+      )
+
+;; Modes Setup
+(evil-mode 1)
 (vertico-mode 1)
-(company-mode 1)
-
+(ivy-mode 1)
+(ivy-prescient-mode 1)
+(org-roam-db-autosync-mode 1)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
-;; Load additional stuff
-(load "~/.emacs.d/modules/evil-window-controls.el")
-(load "~/.emacs.d/modules/org-cycle-hide-drawers.el")
-(load "~/.emacs.d/modules/emacs-outside.el")
+(add-to-list 'load-path "~/.emacs.d/modules/")
 
-;; KEYMAPS !!
-(defvar window-map (define-keymap :full t
-		     "h" #'evil-window-left
-		     "j" #'evil-window-down
-		     "k" #'evil-window-up
-		     "l" #'evil-window-right
-                     "H" #'window-move-left
-		     "J" #'window-move-down
-		     "K" #'window-move-up
-		     "L" #'window-move-right
-		     "v" #'+evil/window-vsplit-and-follow
-		     "n" #'+evil/window-split-and-follow
-		     "r" #'redraw-display
-		     ))
-
-(defvar config-map (define-keymap :full t
-		     "r" (lambda () (interactive) (load "~/nixos/modules/emacs/init.el"))
-		     "h" (lambda () (interactive) (find-file "~/org/home.org"))
-		     "c" (lambda () (interactive) (find-file "~/nixos/modules/emacs/init.el"))
-
-		     ))
-
-(defvar view-map (define-keymap :full t
-		   "v" #'org-toggle-narrow-to-subtree
-		   "h" (lambda() (interactive) (org-cycle-hide-drawers 'all))
-		   "l" #'lsp-describe-at-point
-		   ))
-
-(defvar buffer-map (define-keymap :full t
-		     "p" #'previous-buffer
-		     "n" #'next-buffer
-		     ))
+;; Load Files
+(require 'evil-window-controls)
+(require 'misc-functions)
+(require 'emacs-outside)
+(require 'keybinds)
+(require 'customizations)
+(require 'artist)
+;(load "~/.emacs.d/modules/evil-window-controls.el")
+;(load "~/.emacs.d/modules/org-cycle-hide-drawers.el")
+;(load "~/.emacs.d/modules/emacs-outside.el")
+;(load "~/.emacs.d/modules/keybinds.el")
+;(load "~/.emacs.d/modules/customizations.el")
+;(load "~/.emacs.d/modules/artist.el")
 
 
-(defvar leader-map (define-keymap :full t
-  "." #'find-file
-  "w" window-map
-  "d" config-map
-  "v" view-map
-  "b" buffer-map
-  ))
+
+
+;; Enable themes
+(load-theme 'gruvbox t)
+
+
+(toggle-truncate-lines 1)
+(evil-set-undo-system 'undo-redo)
+
+(set-face-attribute 'default nil :font "Maple Mono" :height 160)
 
 (add-hook 'org-mode-hook (lambda ()
 	    (define-key evil-normal-state-local-map
 			(kbd "TAB") 'org-cycle)
+	    (org-fragtog-mode 1)
+
 	    ))
+
+	    
+
 
 (add-hook 'text-mode-hook (lambda ()
 	    (visual-line-mode)
 	    (org-indent-mode)
 	    ))
 
+
+(defun setup-line-numbers ()
+  (interactive)
+  (display-line-numbers-mode)
+  (setq display-line-numbers 'relative))
+
 (add-hook 'prog-mode-hook (lambda ()
-			    (display-line-numbers-mode)
-			    (setq display-line-numbers 'relative
-			    )))
-
-
-;; Set variables & configuration
-(setq display-line-numbers 'relative)
-(setq cursor-type 'hollow)
-(setq ring-bell-function 'ignore)
-(toggle-truncate-lines 1)
-(evil-set-undo-system 'undo-redo)
-
-;;;; Setup for interacitve linen 
-;;(defun show-line-numbers-relative ()
-;;  (interactive)
-;;  (display-line-numbers-mode)
-;;  (setq display-line-numbers 'relative))
-;;
-;;(add-hook 'prog-mode-hook 'show-line-numbers-relative)
-
-(define-key evil-normal-state-map (kbd "<SPC>") leader-map)
-
-
-(set-face-attribute 'default nil :font "Maple Mono" :height 160)
+			    (setup-line-numbers)
+			    ))
 
 

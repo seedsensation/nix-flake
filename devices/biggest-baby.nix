@@ -38,4 +38,12 @@
       wlp0s20f3.useDHCP = true;
     };
   };
+
+  users.groups.nethack.gid = 1005;
+  users.users.nethack = {
+    createHome = false;
+    isNormalUser = true;
+    uid = 1005;
+    group = "nethack";
+  };
 }

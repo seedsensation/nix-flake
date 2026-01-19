@@ -37,6 +37,11 @@ in
     };
   };
 
+  services.emacs = {
+    enable = true;
+    package = package-groups.emacs;
+  };
+
   home.packages = [
     (pkgs.writeShellScriptBin "eh"  "emacsclient -t $1")
     (pkgs.writeShellScriptBin "edit-emacs" "eh ~/nixos/modules/emacs/init.el")
