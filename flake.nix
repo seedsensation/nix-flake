@@ -53,13 +53,13 @@
 
     nixosModules = [
       home-manager.nixosModules.home-manager
-      ./devices/nixos.nix
+      ./system-modules/nixos.nix
 
       { 
       home-manager.users.mercury = {inputs, ...}: {
         imports = [
           inputs.hyprland.homeManagerModules.default
-          ./modules/desktop.nix
+          ./home-modules/hyprland.nix
         ] ++ homeModules;
       };
       home-manager.extraSpecialArgs = {
@@ -82,8 +82,8 @@
       specialArgs = {inherit inputs;};
       modules = globalModules ++ nixosModules ++
       [ 
-      ./modules/enable-ssh.nix
-      ./devices/biggest-baby.nix
+      ./system-modules/enable-ssh.nix
+      ./system-modules/device-info/biggest-baby.nix
       ];
     };
 
@@ -94,7 +94,7 @@
       modules = globalModules ++ nixosModules ++
       [ 
 	    ## TODO: Replace with this laptop's hardware-config.nix
-      #./hardware/slowest-baby.nix
+      #./system-modules/device-info/slowest-baby.nix
       ];
     };
 
@@ -106,7 +106,7 @@
       globalModules ++ 
       [
 	      home-manager.darwinModules.home-manager
-	      ./devices/darwin.nix
+	      ./system-modules/darwin.nix
 	      { 
 	      home-manager.users.mercury = { pkgs, ... }: {
 	        imports = homeModules ++ [

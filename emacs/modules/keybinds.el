@@ -15,10 +15,10 @@
 		     ))
 
 (defvar config-map (define-keymap 
-		     "r" (lambda () (interactive) (load "~/nixos/modules/emacs/init.el"))
+		     "r" (lambda () (interactive) (load "~/nixos/emacs/init.el"))
 		     "h" (lambda () (interactive) (find-file "~/org/contents.org"))
-		     "c" (lambda () (interactive) (find-file "~/nixos/modules/emacs/init.el"))
-		     "k" (lambda () (interactive) (find-file "~/nixos/modules/emacs/modules/keybinds.el"))
+		     "c" (lambda () (interactive) (find-file "~/nixos/emacs/init.el"))
+		     "k" (lambda () (interactive) (find-file "~/nixos/emacs/modules/keybinds.el"))
 		     ))
 
 (defvar view-map (define-keymap 

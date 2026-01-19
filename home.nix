@@ -8,6 +8,7 @@ in
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
 
+
   home.sessionVariables = {
     EDITOR = "emacsclient";
   };
@@ -47,6 +48,7 @@ in
     (pkgs.writeShellScriptBin "edit-emacs" "eh ~/nixos/modules/emacs/init.el")
   ];
 
-  home.file.".emacs.d".source = config.lib.file.mkOutOfStoreSymlink ./modules/emacs;
+  home.file.".emacs.d".source = config.lib.file.mkOutOfStoreSymlink ./emacs;
+  xdg.configFile."emacs".source = ./emacs;
 
 }

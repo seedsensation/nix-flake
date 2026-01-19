@@ -29,3 +29,5 @@
   "Swap windows down."
   (interactive "P")
   (+evil--window-swap 'down (or arg +evil-want-move-window-to-wrap-around)))
+
+(provide 'evil-window-controls)

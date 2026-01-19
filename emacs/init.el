@@ -4,7 +4,7 @@
 (setq variable-configs 'go-here
 
       ;; Basic configs
-      custom-file "~/nixos/modules/emacs/modules/customizations.el"
+      custom-file "~/nixos/emacs/customizations.el"
       display-line-numbers 'relative
       ring-bell-function 'ignore
 

@@ -27,10 +27,6 @@
 
   home.file.".wallpapers".source = config.lib.file.mkOutOfStoreSymlink ./wallpapers;
 
-  xdg.configFile."emacs".source = ./emacs;
-
-
-
   home.pointerCursor = {
     gtk.enable = true;
     package = pkgs.bibata-cursors;
