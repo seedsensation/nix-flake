@@ -60,17 +60,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1768837033,
-        "narHash": "sha256-YF73yleGFsG3Ueix2ruCOBYonCixq8b9QCZ1lpnDljk=",
-        "owner": "seedsensation",
-        "repo": "emacs-flake",
-        "rev": "8eca4805a1c29a5548f68f0b617a6f8c705eed6c",
-        "type": "github"
+        "lastModified": 1768903810,
+        "narHash": "sha256-uiHyDZ6Iy6sAJKzABKPEBy/DrkB+UwwSq/YGqHQ3j7g=",
+        "ref": "refs/heads/main",
+        "rev": "d74a529b7970e45138c232f0075ac80c4acb449f",
+        "revCount": 4,
+        "type": "git",
+        "url": "file:///home/mercury/projects/emacs-flake"
       },
       "original": {
-        "owner": "seedsensation",
-        "repo": "emacs-flake",
-        "type": "github"
+        "type": "git",
+        "url": "file:///home/mercury/projects/emacs-flake"
       }
     },
     "flake-compat": {

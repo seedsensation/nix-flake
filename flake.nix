@@ -27,20 +27,21 @@
     };
 
     emacs-flake = {
-      url = "github:seedsensation/emacs-flake";
+      url = "git+file:///home/mercury/projects/emacs-flake";
+      #url = "github:seedsensation/emacs-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };
   outputs = inputs@{
     self,
-    nixpkgs,
-    home-manager,
     darwin,
+    emacs-flake,
+    home-manager,
+    hy3,
     hyprland,
     hyprland-plugins,
-      hy3,
-      emacs-flake,
+    nixpkgs,
   }: 
   let
     globalModules = [
@@ -66,7 +67,7 @@
         imports = [
           inputs.hyprland.homeManagerModules.default
           ./home-modules/hyprland.nix
-        ] ++ homeModules;
+        ];
       };
       home-manager.extraSpecialArgs = {
         inherit inputs;
@@ -76,7 +77,6 @@
     ];
 
     homeModules = [
-      ./home.nix
       {home.file.".hushlogin".text = "";}
     ];
   in {

@@ -1,6 +1,7 @@
 { config, pkgs, inputs, ... }:
 let
   package-groups = import ./packages.nix { inherit pkgs; };
+  platform = pkgs.stdenv.hostPlatform.system;
 in
 {
   imports = [ 
@@ -49,8 +50,10 @@ in
   ];
 
   home.file.".emacs.d".source = config.lib.file.mkOutOfStoreSymlink ./emacs;
-  xdg.configFile."emacs".source = ./emacs;
+  xdg.configFile."emacs".source = config.lib.file.mkOutOfStoreSymlink ./emacs;
+  home.file.test.source = config.lib.file.mkOutOfStoreSymlink inputs.emacs-flake.packages.${platform}.default;
+  #home.file.".emacs.d".source = config.lib.file.mkOutOfStoreSymlink inputs.emacs-flake.packages.${platform}.default;
+  #xdg.configFile."emacs".source = config.lib.file.mkOutOfStoreSymlink inputs.emacs-flake.packages.${platform}.default;
 
-  home.file."test".source = config.lib.file.mkOutOfStoreSymlink inputs.emacs-flake.packages.${system}.emacs-flake;
 
 }

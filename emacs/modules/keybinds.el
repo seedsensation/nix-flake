@@ -58,6 +58,8 @@
 (evil-define-key '(list normal motion visual) global-map (kbd "_") 'avy-goto-line)
 (evil-define-key 'visual global-map "S" 'surround-insert)
 
+(define-key help-mode-map (kbd "<SPC>") leader-map)
+
 ;;;;;;;;;;;;;;;;;;;;; LOCAL KEYBINDS ;;;;;;;;;;;;;;;;;;;;;
 
 
