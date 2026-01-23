@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{pkgs, config, ...}:
 let
   package-groups = import ../packages.nix { inherit pkgs config; };
 in

@@ -72,7 +72,7 @@
 	    (define-key evil-normal-state-local-map
 			(kbd "TAB") 'org-cycle)
 	    (org-fragtog-mode 1)
-	    (org-indent-mode)
+	    (org-indent-mode 1)
 	    (org-roam-db-autosync-mode)
 
 	    ))
@@ -91,11 +91,11 @@
   (display-line-numbers-mode)
   (setq display-line-numbers 'relative))
 
-(defvar prog-mode-lsp-enable-hook nil "Hook to enable LSP mode for specific modes")
+(defvar lsp-enable-hook nil "Hook to enable LSP mode for specific modes")
 
 (defun add-to-lsp-hook (&rest hooks)
   (dolist (p hooks)
-    (add-hook 'prog-mode-lsp-enable-hook p))
+    (add-hook 'lsp-enable-hook p))
   t)
 
 (defun lsp-enable-hook-activate ()
@@ -103,9 +103,9 @@
   (lsp-mode)
 )
   
-(add-to-lsp-hook 'java-mode-hook 'python-mode-hook 'rustic-mode)
+(add-to-lsp-hook 'java-mode-hook 'python-mode-hook 'rustic-mode 'nxml-mode)
 
-(add-hook 'prog-mode-lsp-enable-hook 'lsp-enable-hook-activate)
+(add-hook 'lsp-enable-hook 'lsp-enable-hook-activate)
 
 (add-hook 'prog-mode-hook (lambda ()
 			    (setup-line-numbers)
@@ -113,6 +113,7 @@
 			    (company-mode)
 			    ))
 
+(desktop-save-mode 1)
 
 ;;(setq path "~/.emacs-desktop/")
 ;;(if (file-exists-p
