@@ -1,6 +1,6 @@
 { config, pkgs, inputs, ... }:
 let
-  package-groups = import ./packages.nix { inherit pkgs config; };
+  package-groups = import ./packages.nix { inherit pkgs config inputs; };
   platform = pkgs.stdenv.hostPlatform.system;
   emacs-dir = inputs.emacs-flake.packages.${platform}.default;
 in
@@ -52,9 +52,9 @@ in
     (pkgs.writeShellScriptBin "store-path" "nix eval nixpkgs#$1.outPath | tr -d '\"' | xargs")
   ];
 
-  xdg.configFile."emacs".source = ./emacs;
-  home.file.".emacs.d/init.el".source = config.lib.file.mkOutOfStoreSymlink ./emacs/init.el;
-  xdg.configFile."emacs".source = config.lib.file.mkOutOfStoreSymlink ./emacs;
+  #home.file.".emacs.d/init.el".source = config.lib.file.mkOutOfStoreSymlink ./emacs/init.el;
+  xdg.configFile."emacs".source = emacs-dir;
+  home.file.".emacs.d/readme.elc".source = config.lib.file.mkOutOfStoreSymlink "${emacs-dir}/readme.elc";
   home.file.test.source = config.lib.file.mkOutOfStoreSymlink emacs-dir;
   #home.file.".emacs.d".source = config.lib.file.mkOutOfStoreSymlink inputs.emacs-flake.packages.${platform}.default;
   #xdg.configFile."emacs".source = config.lib.file.mkOutOfStoreSymlink inputs.emacs-flake.packages.${platform}.default;

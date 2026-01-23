@@ -1,6 +1,6 @@
-{pkgs, config, ...}:
+{pkgs, config, inputs, ...}:
 let
-  package-groups = import ../packages.nix { inherit pkgs config; };
+  package-groups = import ../packages.nix { inherit pkgs config inputs; };
 in
 {
   environment.systemPackages = package-groups.ssh-utils;

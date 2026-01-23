@@ -41,7 +41,7 @@
     };
 
     emacs-flake = {
-      url = "git+file:///home/mercury/projects/emacs-flake";
+      url = "github:seedsensation/emacs-flake";
       #url = "github:seedsensation/emacs-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
