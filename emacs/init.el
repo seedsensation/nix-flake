@@ -4,9 +4,10 @@
 (setq variable-configs 'go-here
 
       ;; Basic configs
-      custom-file "~/nixos/emacs/customizations.el"
+      custom-file "~/nixos/emacs/modules/customizations.el"
       display-line-numbers 'relative
       ring-bell-function 'ignore
+      inhibit-startup-screen t
 
       ;; Org Mode Configs
       org-latex-create-formula-image-program 'dvipng
@@ -31,11 +32,13 @@
 (ivy-mode 1)
 (ivy-prescient-mode 1)
 (org-roam-db-autosync-mode 1)
+(which-key-mode 1)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
+(indent-tabs-mode 0)
 
-(add-to-list 'load-path "~/.emacs.d/modules/")
+(add-to-list 'load-path "~/.config/emacs/modules/")
 
 ;; Load Files
 (require 'evil-window-controls)
@@ -67,6 +70,8 @@
 	    (define-key evil-normal-state-local-map
 			(kbd "TAB") 'org-cycle)
 	    (org-fragtog-mode 1)
+	    (org-indent-mode)
+	    (org-roam-db-autosync-mode)
 
 	    ))
 
@@ -75,8 +80,8 @@
 
 (add-hook 'text-mode-hook (lambda ()
 	    (visual-line-mode)
-	    (org-indent-mode)
 	    ))
+
 
 
 (defun setup-line-numbers ()
@@ -86,6 +91,17 @@
 
 (add-hook 'prog-mode-hook (lambda ()
 			    (setup-line-numbers)
+			    ;;(lsp-mode)
+			    (lsp-ui-mode)
+			    (lsp-mode)
+			    (format-all-mode)
 			    ))
 
+(setq path "~/.emacs-desktop/")
+(if (file-exists-p
+     (concat path ".emacs.desktop"))
+    (desktop-read path))
 
+(add-hook 'kill-emacs-hook
+	  `(lambda ()
+	     (desktop-save ,path t)))

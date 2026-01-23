@@ -6,23 +6,40 @@ let
   package-groups = import ./packages.nix { inherit pkgs; };
 in
 {
-  
+
   nixpkgs.config.allowUnfree = true;
 
-  programs.git = {
-    enable = true;
-    config = {
-      init.defaultBranch = "main";
-      url = {
-        "https://github.com/" = {
-	  insteadOf = [
-	    "gh:"
-	    "github:"
-	  ];
-	};
+  programs = {
+    git = {
+      enable = true;
+      config = {
+        init.defaultBranch = "main";
+        url = {
+          "https://github.com/" = {
+	          insteadOf = [
+	            "gh:"
+	            "github:"
+	          ];
+	        };
+          "https://olympus.ntu.ac.uk/".insteadOf = [ "ol:" ];
+        };
+        user.name = "Mercury";
+        user.email = "m@rcury.com";
       };
-      user.name = "Mercury";
-      user.email = "m@rcury.com";
+    };
+    java = {
+      enable = true;
+      #package = (pkgs.jdk25.override { enableJavaFX = true; });
+      package = (pkgs.jdk25.overrideAttrs (old: {
+        enableJavaFX = true;
+        buildInputs = old.buildInputs ++ [pkgs.makeWrapper];
+        postFixup = ''
+          wrapProgram $out/bin/java \
+          --add-flags "--upgrade-module-path ${pkgs.openjfx25}/lib --module-path ${pkgs.openjfx25}/lib"
+          wrapProgram $out/bin/javac \
+          --add-flags "--upgrade-module-path ${pkgs.openjfx25}/lib --module-path ${pkgs.openjfx25}/lib"
+        '';
+      }));
     };
   };
 
@@ -37,10 +54,10 @@ in
   };
 
   environment.systemPackages = with package-groups;
-    global-utils;
+  global-utils;
 
   users.users.mercury.packages = with package-groups;
-    emacs-deps ++ user-global ++ global-scripts;
+  emacs-deps ++ user-global ++ global-scripts;
 
   services = {
     mysql = {
@@ -49,20 +66,20 @@ in
     };
   };
 
-  
+
   #services.emacs = {
-  #  enable = true;
-  #  defaultEditor = true;
-  #  package = package-groups.emacs;
+    #  enable = true;
+    #  defaultEditor = true;
+    #  package = package-groups.emacs;
 
-  #};
+    #};
 
-  fonts.packages = package-groups.fonts;
+    fonts.packages = package-groups.fonts;
 
 
 
-  # Please do not touch this without considering the ramifications!!!
-  system.stateVersion = "25.11";
+    # Please do not touch this without considering the ramifications!!!
+    system.stateVersion = "25.11";
 
 
 }

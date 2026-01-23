@@ -3,6 +3,9 @@ let
   package-groups = import ../packages.nix { inherit pkgs; };
 in
 {
+  imports = [
+    ./remote-desktop.nix
+  ];
 
   users.mutableUsers = true;
   

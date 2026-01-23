@@ -42,6 +42,12 @@
     wofi
     wtype
     qpwgraph
+    maven
+    #jdk25_headless
+    #javaPackages.openjfx25
+    libGL
+    gnome-keyring
+    openjfx25
   ];
 
   fonts = with pkgs; [
@@ -82,6 +88,8 @@
     # rust
     rustc
     cargo
+
+    gitFull
   ];
 
   emacs-deps = with pkgs; [
@@ -93,6 +101,9 @@
     tailwindcss-language-server
     nixfmt
     sqlite
+    java-language-server
+    jdt-language-server
+    astyle
 
     # LaTeX Packages
     (texliveBasic.withPackages (
@@ -134,6 +145,15 @@
     surround
     vertico
     websocket
+    lsp-java
+    lsp-mode
+    lsp-ui
+    treemacs
+    treemacs-evil
+    projectile
+    git-gutter
+    smartparens
+    format-all
   ])
 
   ++
