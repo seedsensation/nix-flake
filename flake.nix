@@ -10,12 +10,26 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    darwin-emacs = {
+      url = "github:nix-giant/nix-darwin-emacs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    emacs-packages = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -36,7 +50,9 @@
   outputs = inputs@{
     self,
     darwin,
+    darwin-emacs,
     emacs-flake,
+    emacs-packages,
     home-manager,
     hy3,
     hyprland,
@@ -54,6 +70,8 @@
           users.mercury = ./home.nix;
           backupFileExtension = ".bak";
         };
+
+	      nixpkgs.overlays = [ emacs-packages.overlays.emacs ];
       }
       ./configuration.nix
     ];
@@ -114,11 +132,9 @@
 	      home-manager.darwinModules.home-manager
 	      ./system-modules/darwin.nix
 	      { 
+	      nixpkgs.overlays = [ darwin-emacs.overlays.emacs ];
 	      home-manager.users.mercury = { pkgs, ... }: {
-	        imports = homeModules ++ [
-	          (pkgs.writeShellScriptBin "rebuild-darwin" "sudo darwin-rebuild switch --flake ~/darwin#big-mac")
-	          (pkgs.writeShellScriptBin "reload-darwin" "sudo darwin-rebuild test --flake ~/darwin#big-mac")
-	        ];
+	        imports = homeModules;
 	      };
 	      }
       ];

@@ -25,7 +25,7 @@
   xdg.configFile."waybar".source = ./dotfiles/waybar;
   #home.file.".scripts".source = ../scripts;
 
-  home.file.".wallpapers".source = config.lib.file.mkOutOfStoreSymlink ./wallpapers;
+  home.file.".wallpapers".source = config.lib.file.mkOutOfStoreSymlink ./dotfiles/wallpapers;
 
   home.pointerCursor = {
     gtk.enable = true;

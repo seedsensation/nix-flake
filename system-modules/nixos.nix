@@ -1,8 +1,11 @@
-{pkgs, inputs, ...}:
+{pkgs, inputs, config, ...}:
 let
-  package-groups = import ../packages.nix { inherit pkgs; };
+  package-groups = import ../packages.nix { inherit pkgs config; };
 in
 {
+  imports = [
+    ./remote-desktop.nix
+  ];
 
   users.mutableUsers = true;
   
@@ -76,4 +79,53 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
 
+  console = {
+    font = "Lat2-Terminus16";
+    #keyMap = "uk";
+    useXkbConfig = true; # use xkb.options in tty.
+  };
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_GB.UTF-8";
+
+  programs = {
+    git = {
+      enable = true;
+      config = {
+        init.defaultBranch = "main";
+        url = {
+          "https://github.com/" = {
+	          insteadOf = [
+	            "gh:"
+	            "github:"
+	          ];
+	        };
+          "https://olympus.ntu.ac.uk/".insteadOf = [ "ol:" ];
+        };
+        user.name = "Mercury";
+        user.email = "m@rcury.com";
+      };
+    };
+    java = {
+      enable = true;
+      #package = (pkgs.jdk25.override { enableJavaFX = true; });
+      package = (pkgs.jdk25.overrideAttrs (old: {
+        enableJavaFX = true;
+        buildInputs = old.buildInputs ++ [pkgs.makeWrapper];
+        postFixup = ''
+          wrapProgram $out/bin/java \
+          --add-flags "--upgrade-module-path ${pkgs.openjfx25}/lib --module-path ${pkgs.openjfx25}/lib"
+          wrapProgram $out/bin/javac \
+          --add-flags "--upgrade-module-path ${pkgs.openjfx25}/lib --module-path ${pkgs.openjfx25}/lib"
+        '';
+      }));
+    };
+  };
+  services = {
+    mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+    };
+  };
+
+  system.stateVersion = "25.11";
 }

@@ -1,3 +1,4 @@
+;; -*- lexical-bindings: t -*-
 (defun thanos/wtype-text (text)
   "Process TEXT for wtype, handling newlines properly."
   (let* ((has-final-newline (string-match-p "\n$" text))

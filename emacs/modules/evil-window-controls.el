@@ -1,3 +1,4 @@
+;; -*- lexical-bindings: t -*-
 
 (defun +evil/window-split-and-follow()
   "Split current window horizontally, then focus on new window.

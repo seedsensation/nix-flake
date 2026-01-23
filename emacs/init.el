@@ -1,12 +1,14 @@
+;; -*- lexical-bindings: t -*-
 ;; Variables to Set
 ;; If any of these variables break, the whole config
 ;;   will fail to go through.
 (setq variable-configs 'go-here
 
       ;; Basic configs
-      custom-file "~/nixos/emacs/customizations.el"
+      custom-file "~/nixos/emacs/modules/customizations.el"
       display-line-numbers 'relative
       ring-bell-function 'ignore
+      inhibit-startup-screen t
 
       ;; Org Mode Configs
       org-latex-create-formula-image-program 'dvipng
@@ -21,6 +23,7 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t
       completion-styles '(basic substring partial-completion flex)
+      warning-suppress-log-types '((files missing-lexbind-cookie))
 
 
       )
@@ -31,11 +34,13 @@
 (ivy-mode 1)
 (ivy-prescient-mode 1)
 (org-roam-db-autosync-mode 1)
+(which-key-mode 1)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
+(indent-tabs-mode 0)
 
-(add-to-list 'load-path "~/.emacs.d/modules/")
+(add-to-list 'load-path "~/.config/emacs/modules/")
 
 ;; Load Files
 (require 'evil-window-controls)
@@ -67,6 +72,8 @@
 	    (define-key evil-normal-state-local-map
 			(kbd "TAB") 'org-cycle)
 	    (org-fragtog-mode 1)
+	    (org-indent-mode 1)
+	    (org-roam-db-autosync-mode)
 
 	    ))
 
@@ -75,17 +82,43 @@
 
 (add-hook 'text-mode-hook (lambda ()
 	    (visual-line-mode)
-	    (org-indent-mode)
 	    ))
-
 
 (defun setup-line-numbers ()
   (interactive)
   (display-line-numbers-mode)
   (setq display-line-numbers 'relative))
 
+(defvar lsp-enable-hook nil "Hook to enable LSP mode for specific modes")
+
+
+(defun add-to-lsp-hook (&rest hooks)
+  (dolist (p hooks)
+    (add-hook 'lsp-enable-hook p))
+  t)
+
+(defun lsp-enable-hook-activate ()
+  (lsp-ui-mode)
+  (lsp-mode)
+)
+  
+(add-to-lsp-hook 'java-mode-hook 'python-mode-hook 'rustic-mode-hook 'nxml-mode-hook)
+
+(add-hook 'lsp-enable-hook 'lsp-enable-hook-activate)
+
 (add-hook 'prog-mode-hook (lambda ()
 			    (setup-line-numbers)
+			    (format-all-mode)
+			    (company-mode)
 			    ))
 
+(desktop-save-mode 1)
 
+;;(setq path "~/.emacs-desktop/")
+;;(if (file-exists-p
+;;     (concat path ".emacs.desktop"))
+;;    (desktop-read path))
+;;
+;;(add-hook 'kill-emacs-hook
+;;	  `(lambda ()
+;;	     (desktop-save ,path t)))

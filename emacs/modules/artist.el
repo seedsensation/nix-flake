@@ -1,3 +1,4 @@
+;; -*- lexical-bindings: t -*-
 ;;; artist.el --- draw ascii graphics with your mouse
 
 ;; Copyright (C) 2000, 2001, 2004 Free Software Foundation, Inc.

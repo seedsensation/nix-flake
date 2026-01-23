@@ -1,3 +1,4 @@
+;; -*- lexical-bindings: t -*-
 ;;;;;;;;;;;;;;;;;;;;; GLOBAL KEYBINDS ;;;;;;;;;;;;;;;;;;;;;
 
 (defvar window-map (define-keymap 
@@ -19,6 +20,7 @@
 		     "h" (lambda () (interactive) (find-file "~/org/contents.org"))
 		     "c" (lambda () (interactive) (find-file "~/nixos/emacs/init.el"))
 		     "k" (lambda () (interactive) (find-file "~/nixos/emacs/modules/keybinds.el"))
+		     "d" (lambda () (interactive) (dired "./"))
 		     ))
 
 (defvar view-map (define-keymap 
@@ -40,6 +42,14 @@
 			"g" #'customize-group
 			))
 
+(defvar project-map (define-keymap
+		      "t" #'treemacs
+		      "e" (lambda () (interactive) (lsp-treemacs-errors-list))
+		      "x" #'projectile-compile-project
+		      "p" (lambda () (interactive)
+			    (projectile-switch-project)
+		      )))
+
 (defvar leader-map (define-keymap
   "." #'find-file
   "w" window-map
@@ -48,14 +58,18 @@
   "b" buffer-map
   "c" customize-map
   "h" help-map
+  "p" project-map
   "/" #'avy-goto-char-2
   ))
+
 
 			
 (evil-define-key 'normal global-map (kbd "<SPC>") leader-map)
 (evil-define-key 'normal global-map (kbd "=") 'pop-global-mark)
+
 (evil-define-key '(list normal motion visual) global-map (kbd "-") 'avy-goto-char)
 (evil-define-key '(list normal motion visual) global-map (kbd "_") 'avy-goto-line)
+
 (evil-define-key 'visual global-map "S" 'surround-insert)
 
 (define-key help-mode-map (kbd "<SPC>") leader-map)
@@ -71,6 +85,10 @@
       map
       ))
   )
+
+(evil-define-key 'normal treemacs-mode-map (kbd "<RET>") #'treemacs-RET-action)
+(evil-define-key 'normal treemacs-mode-map (kbd "<TAB>") #'treemacs-TAB-action)
+(evil-define-key 'normal lsp-mode-map (kbd "<TAB>") #'lsp-execute-code-action)
 
 
 (defun org-id-reload-all ()
@@ -88,6 +106,7 @@
 			"r" #'org-id-reload-all
 			"b" #'org-mark-ring-goto
 			))
+
 
 
 
