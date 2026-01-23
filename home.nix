@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  package-groups = import ./packages.nix { inherit pkgs; };
+  package-groups = import ./packages.nix { inherit pkgs config; };
 in
 {
   imports = [ 

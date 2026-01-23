@@ -1,3 +1,4 @@
+;; -*- lexical-bindings: t -*-
 ;; Variables to Set
 ;; If any of these variables break, the whole config
 ;;   will fail to go through.
@@ -22,6 +23,7 @@
       read-buffer-completion-ignore-case t
       completion-ignore-case t
       completion-styles '(basic substring partial-completion flex)
+      warning-suppress-log-types '((files missing-lexbind-cookie))
 
 
       )
@@ -89,19 +91,34 @@
   (display-line-numbers-mode)
   (setq display-line-numbers 'relative))
 
+(defvar prog-mode-lsp-enable-hook nil "Hook to enable LSP mode for specific modes")
+
+(defun add-to-lsp-hook (&rest hooks)
+  (dolist (p hooks)
+    (add-hook 'prog-mode-lsp-enable-hook p))
+  t)
+
+(defun lsp-enable-hook-activate ()
+  (lsp-ui-mode)
+  (lsp-mode)
+)
+  
+(add-to-lsp-hook 'java-mode-hook 'python-mode-hook 'rustic-mode)
+
+(add-hook 'prog-mode-lsp-enable-hook 'lsp-enable-hook-activate)
+
 (add-hook 'prog-mode-hook (lambda ()
 			    (setup-line-numbers)
-			    ;;(lsp-mode)
-			    (lsp-ui-mode)
-			    (lsp-mode)
 			    (format-all-mode)
+			    (company-mode)
 			    ))
 
-(setq path "~/.emacs-desktop/")
-(if (file-exists-p
-     (concat path ".emacs.desktop"))
-    (desktop-read path))
 
-(add-hook 'kill-emacs-hook
-	  `(lambda ()
-	     (desktop-save ,path t)))
+;;(setq path "~/.emacs-desktop/")
+;;(if (file-exists-p
+;;     (concat path ".emacs.desktop"))
+;;    (desktop-read path))
+;;
+;;(add-hook 'kill-emacs-hook
+;;	  `(lambda ()
+;;	     (desktop-save ,path t)))

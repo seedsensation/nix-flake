@@ -1,3 +1,4 @@
+;; -*- lexical-bindings: t -*-
 ;;;;;;;;;;;;;;;;;;;;; GLOBAL KEYBINDS ;;;;;;;;;;;;;;;;;;;;;
 
 (defvar window-map (define-keymap 

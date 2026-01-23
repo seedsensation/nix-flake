@@ -1,3 +1,4 @@
+;; -*- lexical-bindings: t -*-
 (defun org-cycle-hide-drawers (state)
   "Re-hide all drawers after a visibility state change."
   (when (and (derived-mode-p 'org-mode)

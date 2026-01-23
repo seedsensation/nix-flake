@@ -2,7 +2,7 @@
 {
   programs.git = {
     enable = true;
-    extraConfig = {
+    settings = {
       credential.helper = "libsecret";
       user.name = "Mercury";
       user.email = "m@rcury.com";

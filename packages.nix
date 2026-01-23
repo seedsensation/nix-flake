@@ -1,10 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   # stuff that wants to go system-wide on every device
   # primarily, things that i want to be able to use as sudo
   global-utils = with pkgs; [
     autoconf
-    busybox
     cmake
     cmatrix
     coreutils
@@ -19,6 +18,9 @@
     sqlite
     vim
     python3
+    maven
+    ##jdk25_headless
+    ##javaPackages.openjfx25
   ];
 
   ssh-utils = with pkgs; [
@@ -27,6 +29,7 @@
 
   # desktop apps, specifically for nixos
   desktop-software = with pkgs; [
+    busybox
     brightnessctl
     firefox
     flameshot
@@ -42,12 +45,10 @@
     wofi
     wtype
     qpwgraph
-    maven
-    #jdk25_headless
-    #javaPackages.openjfx25
-    libGL
     gnome-keyring
+    libGL
     openjfx25
+    gitFull
   ];
 
   fonts = with pkgs; [
@@ -89,7 +90,6 @@
     rustc
     cargo
 
-    gitFull
   ];
 
   emacs-deps = with pkgs; [
@@ -118,62 +118,53 @@
   ];
 
   #### EMACS PACKAGES ####
-  emacs = (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages ( epkgs:
-  (with epkgs.melpaStablePackages; [
-    magit
-    gruvbox-theme
-    org-fragtog
-  ])
+  emacs = (pkgs.emacsWithPackagesFromUsePackage {
+  config = ./emacs/modules/customizations.el;
+  defaultInitFile = false;
+  #package = pkgs.emacs;
+  alwaysEnsure = true;
+  #alwaysPin = "gnu";
+  #alwaysTangle = true;
+  extraEmacsPackages = epkgs: with epkgs; [
 
-  ++
-
-  (with epkgs.melpaPackages; [
-    avy
-    company
-    consult
-    dash
-    emacs-everywhere
-    evil
-    f
-    ivy
-    ivy-prescient
-    magit-section
-    marginalia
-    nix-mode
-    orderless
-    simple-httpd
-    surround
-    vertico
-    websocket
-    lsp-java
-    lsp-mode
-    lsp-ui
-    treemacs
-    treemacs-evil
-    projectile
-    git-gutter
-    smartparens
-    format-all
-  ])
-
-  ++
-
-  (with epkgs.elpaPackages; [
-    devdocs     
-  ])
-
-  ++ (with epkgs; [
-    org
-    org-roam
-    org-roam-ui
-    org-roam-timestamps
-    sqlite3
-    lsp-mode
-  ])
-
-
-
-  );
+  avy
+  company
+  consult
+  dash
+  emacs-everywhere
+  evil
+  f
+  format-all
+  git-gutter
+  gruvbox-theme
+  ivy
+  ivy-prescient
+  lsp-java
+  lsp-mode
+  lsp-mode
+  lsp-ui
+  magit
+  magit-section
+  marginalia
+  nix-mode
+  orderless
+  org
+  org-fragtog
+  org-roam
+  org-roam-timestamps
+  org-roam-ui
+  projectile
+  rustic
+  simple-httpd
+  smartparens
+  sqlite3
+  surround
+  treemacs
+  treemacs-evil
+  vertico
+  websocket
+  ];
+  });
 
   nixos-scripts = [
     (pkgs.writeShellScriptBin "rebuild-nixos" "sudo nixos-rebuild switch")
@@ -183,7 +174,7 @@
   ];
 
   darwin-scripts = [
-    (pkgs.writeShellScriptBin "rebuild-darwin" "sudo darwin-rebuild switch --flake ~/darwin#darwin")
+    (pkgs.writeShellScriptBin "rebuild-darwin" "sudo darwin-rebuild switch --flake ~/nixos#big-mac")
   ];
 
   global-scripts = [
