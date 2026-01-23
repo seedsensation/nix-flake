@@ -84,14 +84,13 @@
 	    (visual-line-mode)
 	    ))
 
-
-
 (defun setup-line-numbers ()
   (interactive)
   (display-line-numbers-mode)
   (setq display-line-numbers 'relative))
 
 (defvar lsp-enable-hook nil "Hook to enable LSP mode for specific modes")
+
 
 (defun add-to-lsp-hook (&rest hooks)
   (dolist (p hooks)
@@ -103,7 +102,7 @@
   (lsp-mode)
 )
   
-(add-to-lsp-hook 'java-mode-hook 'python-mode-hook 'rustic-mode 'nxml-mode)
+(add-to-lsp-hook 'java-mode-hook 'python-mode-hook 'rustic-mode-hook 'nxml-mode-hook)
 
 (add-hook 'lsp-enable-hook 'lsp-enable-hook-activate)
 
