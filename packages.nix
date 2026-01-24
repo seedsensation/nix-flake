@@ -29,7 +29,7 @@
 
   # desktop apps, specifically for nixos
   desktop-software = with pkgs; [
-    busybox
+    #busybox
     brightnessctl
     firefox
     flameshot
@@ -119,51 +119,51 @@
 
   #### EMACS PACKAGES ####
   emacs = (pkgs.emacsWithPackagesFromUsePackage {
-  config = ./emacs/modules/customizations.el;
-  defaultInitFile = false;
-  #package = pkgs.emacs;
-  alwaysEnsure = true;
-  #alwaysPin = "gnu";
-  #alwaysTangle = true;
-  extraEmacsPackages = epkgs: with epkgs; [
+    config = ./emacs/modules/customizations.el;
+    defaultInitFile = false;
+    #package = pkgs.emacs;
+    alwaysEnsure = true;
+    #alwaysPin = "gnu";
+    #alwaysTangle = true;
+    extraEmacsPackages = epkgs: with epkgs; [
 
-  avy
-  company
-  consult
-  dash
-  emacs-everywhere
-  evil
-  f
-  format-all
-  git-gutter
-  gruvbox-theme
-  ivy
-  ivy-prescient
-  lsp-java
-  lsp-mode
-  lsp-mode
-  lsp-ui
-  magit
-  magit-section
-  marginalia
-  nix-mode
-  orderless
-  org
-  org-fragtog
-  org-roam
-  org-roam-timestamps
-  org-roam-ui
-  projectile
-  rustic
-  simple-httpd
-  smartparens
-  sqlite3
-  surround
-  treemacs
-  treemacs-evil
-  vertico
-  websocket
-  ];
+      avy
+      company
+      consult
+      dash
+      emacs-everywhere
+      evil
+      f
+      format-all
+      git-gutter
+      gruvbox-theme
+      ivy
+      ivy-prescient
+      lsp-java
+      lsp-mode
+      lsp-mode
+      lsp-ui
+      magit
+      magit-section
+      marginalia
+      nix-mode
+      orderless
+      org
+      org-fragtog
+      org-roam
+      org-roam-timestamps
+      org-roam-ui
+      projectile
+      rustic
+      simple-httpd
+      smartparens
+      sqlite3
+      surround
+      treemacs
+      treemacs-evil
+      vertico
+      websocket
+    ];
   });
 
   nixos-scripts = [
