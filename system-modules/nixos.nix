@@ -5,6 +5,7 @@ in
 {
   imports = [
     ./remote-desktop.nix
+    ./docker.nix
   ];
 
   users.mutableUsers = true;

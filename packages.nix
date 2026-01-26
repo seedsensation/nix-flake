@@ -19,6 +19,7 @@
     vim
     python3
     maven
+    screen
     ##jdk25_headless
     ##javaPackages.openjfx25
   ];
@@ -49,6 +50,9 @@
     libGL
     openjfx25
     gitFull
+    docker
+    docker-compose
+    tree-sitter-grammars.tree-sitter-yaml
   ];
 
   fonts = with pkgs; [
@@ -163,6 +167,7 @@
       treemacs-evil
       vertico
       websocket
+      yaml-mode
     ];
   });
 
