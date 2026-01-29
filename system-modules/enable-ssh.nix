@@ -3,7 +3,9 @@ let
   package-groups = import ../packages.nix { inherit pkgs config; };
 in
 {
-  environment.systemPackages = package-groups.ssh-utils;
+  environment.systemPackages = with pkgs; [
+    google-authenticator
+  ];
 
   services.openssh = {
     enable = true;

@@ -14,23 +14,21 @@
     gd
     gnumake
     llvm 
-    neovim
-    sqlite
-    vim
-    python3
     maven
+    neovim
+    python3
     screen
+    sqlite
+    tree
+    vim
     ##jdk25_headless
     ##javaPackages.openjfx25
-  ];
-
-  ssh-utils = with pkgs; [
-    google-authenticator
   ];
 
   # desktop apps, specifically for nixos
   desktop-software = with pkgs; [
     #busybox
+    openttd
     brightnessctl
     firefox
     flameshot
@@ -50,9 +48,6 @@
     libGL
     openjfx25
     gitFull
-    docker
-    docker-compose
-    tree-sitter-grammars.tree-sitter-yaml
   ];
 
   fonts = with pkgs; [
@@ -76,6 +71,9 @@
 
   # userspace utilities on every device
   user-global = with pkgs; [
+    # command line utils
+    tree
+    
     # for nice looking zshrc
     fastfetch
 
@@ -108,6 +106,7 @@
     java-language-server
     jdt-language-server
     astyle
+    tree-sitter-grammars.tree-sitter-yaml
 
     # LaTeX Packages
     (texliveBasic.withPackages (
@@ -131,6 +130,7 @@
     #alwaysTangle = true;
     extraEmacsPackages = epkgs: with epkgs; [
 
+      ace-window
       avy
       company
       consult
@@ -166,6 +166,7 @@
       treemacs
       treemacs-evil
       vertico
+      vterm
       websocket
       yaml-mode
     ];

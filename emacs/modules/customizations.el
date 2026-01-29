@@ -5,11 +5,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(initial-buffer-choice "~/org/contents.org")
- ;;'(lsp-java-server-install-dir "/home/mercury/.lsp/eclipse.jdt.ls/")
- ;;'(lsp-java-workspace-cache-dir "/home/mercury/.lsp/workspace/.cache")
- ;;'(lsp-java-workspace-dir "/home/mercury/.lsp/workspace")
- ;;'(lsp-server-install-dir "/home/mercury/.lsp/install")
- ;;'(lsp-session-file "/home/mercury/.lsp/session-v1")
+ '(org-enforce-todo-dependencies t)
  '(org-format-latex-options
    '(:foreground default :background default :scale 2.25 :html-foreground
 		 "Black" :html-background "Transparent" :html-scale

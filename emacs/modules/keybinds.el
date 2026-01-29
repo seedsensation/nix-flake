@@ -47,8 +47,10 @@
 		      "e" (lambda () (interactive) (lsp-treemacs-errors-list))
 		      "x" #'projectile-compile-project
 		      "p" (lambda () (interactive)
-			    (projectile-switch-project)
-		      )))
+			    (projectile-switch-project))
+		      "l" #'lsp
+		      "v" #'vterm
+		      ))
 
 (defvar leader-map (define-keymap
   "." #'find-file
@@ -71,6 +73,10 @@
 (evil-define-key '(list normal motion visual) global-map (kbd "_") 'avy-goto-line)
 
 (evil-define-key 'visual global-map "S" 'surround-insert)
+
+(keymap-global-set "M-o" 'ace-window)
+(keymap-global-set "C-x C-<up>" 'electric-buffer-list)
+;;(define-key electric-buffer-menu-mode-map (kbd "o") 'Electric-buffer-menu-select)
 
 ;;;;;;;;;;;;;;;;;;;;; LOCAL KEYBINDS ;;;;;;;;;;;;;;;;;;;;;
 

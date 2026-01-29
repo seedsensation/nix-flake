@@ -102,15 +102,22 @@
   (lsp-mode)
 )
   
-(add-to-lsp-hook 'java-mode-hook 'python-mode-hook 'rustic-mode-hook 'nxml-mode-hook)
 
-(add-hook 'lsp-enable-hook 'lsp-enable-hook-activate)
+(add-hook 'java-mode-hook 'lsp-enable-hook-activate)
 
 (add-hook 'prog-mode-hook (lambda ()
 			    (setup-line-numbers)
 			    (format-all-mode)
 			    (company-mode)
 			    ))
+
+(setq aw-ignore-on nil)
+(delq 'treemacs-mode aw-ignored-buffers)
+
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "WAIT(w@/!)" "INPROGRESS(i@/!)" "|" "DONE(d!)" "CANCELLED(c@)")))
+(setq org-agenda-dim-blocked-tasks 'invisible)
+
 
 (desktop-save-mode 1)
 

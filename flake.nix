@@ -100,8 +100,14 @@
       specialArgs = {inherit inputs;};
       modules = globalModules ++ nixosModules ++
       [ 
-      ./system-modules/enable-ssh.nix
+      # Device specific configs
       ./system-modules/device-info/biggest-baby.nix
+
+      # Modules to enable
+      ./system-modules/docker.nix
+      ./system-modules/enable-ssh.nix
+      ./system-modules/razer.nix
+      ./system-modules/remote-desktop.nix
       ];
     };
 
