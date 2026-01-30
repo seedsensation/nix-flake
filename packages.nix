@@ -122,7 +122,7 @@
 
   #### EMACS PACKAGES ####
   emacs = (pkgs.emacsWithPackagesFromUsePackage {
-    config = "${inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/custom.elc";
+    config = (builtins.readFile "${inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/custom.el");
     defaultInitFile = false;
     #package = pkgs.emacs;
     alwaysEnsure = true;

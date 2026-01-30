@@ -22,7 +22,7 @@
 
     emacs-flake = {
       url = "github:seedsensation/emacs-flake";
-      #inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
