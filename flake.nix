@@ -20,6 +20,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    emacs-flake = {
+      url = "github:seedsensation/emacs-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,6 +53,7 @@
     darwin,
     darwin-emacs,
     emacs-packages,
+    emacs-flake,
     hyprland,
     hyprland-plugins,
     hy3
@@ -61,6 +67,9 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           users.mercury = ./home.nix;
+          extraSpecialArgs = {
+            inherit inputs;
+          };
           backupFileExtension = ".bak";
         };
 

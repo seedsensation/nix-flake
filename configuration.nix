@@ -3,7 +3,7 @@
 
 { inputs, config, lib, pkgs, nixpkgs, ... }:
 let
-  package-groups = import ./packages.nix { inherit pkgs config; };
+  package-groups = import ./packages.nix { inherit pkgs config inputs; };
 in
 {
 

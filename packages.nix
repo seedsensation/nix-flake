@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, ... }:
 {
   # stuff that wants to go system-wide on every device
   # primarily, things that i want to be able to use as sudo
@@ -122,7 +122,7 @@
 
   #### EMACS PACKAGES ####
   emacs = (pkgs.emacsWithPackagesFromUsePackage {
-    config = ./emacs/modules/customizations.el;
+    config = "${(inputs.emacs-flake)}/custom.elc";
     defaultInitFile = false;
     #package = pkgs.emacs;
     alwaysEnsure = true;

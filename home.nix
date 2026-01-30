@@ -1,6 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 let
-  package-groups = import ./packages.nix { inherit pkgs config; };
+  package-groups = import ./packages.nix { inherit pkgs config inputs; };
 in
 {
   imports = [ 
@@ -70,8 +70,9 @@ fastfetch
     (pkgs.writeShellScriptBin "store-path" "nix eval nixpkgs#$1.outPath | tr -d '\"' | xargs")
   ];
 
-  xdg.configFile."emacs".source = ./emacs;
-  home.file.".emacs.d/init.el".source = config.lib.file.mkOutOfStoreSymlink ./emacs/init.el;
+  #xdg.configFile."emacs".source = ./emacs;
+  home.file.".emacs.d/init.elc".source = config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake}/init.elc";
+  home.file.".emacs.d/readme.elc".source = config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake}/readme.elc";
   
 
 }
