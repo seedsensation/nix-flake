@@ -71,8 +71,8 @@ fastfetch
   ];
 
   #xdg.configFile."emacs".source = ./emacs;
-  home.file.".emacs.d/init.elc".source = config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake}/init.elc";
-  home.file.".emacs.d/readme.elc".source = config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake}/readme.elc";
+  home.file.".emacs.d/init.elc".source   = config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/init.elc";
+  home.file.".emacs.d/readme.elc".source = config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/readme.elc";
   
 
 }
