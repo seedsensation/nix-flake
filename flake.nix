@@ -26,10 +26,10 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    emacs-flake-local = {
-      url = "git+file:///home/mercury/projects/emacs-flake";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
+    #emacs-flake-local = {
+    #  url = "git+file:///home/mercury/projects/emacs-flake";
+    #  inputs.nixpkgs.follows = "nixpkgs-stable";
+    #};
  
 
     home-manager = {
