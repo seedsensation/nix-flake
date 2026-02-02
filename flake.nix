@@ -4,6 +4,7 @@
   inputs = {
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     darwin = {
       url = "github:nix-darwin/nix-darwin";
@@ -49,6 +50,7 @@
   outputs = inputs@{
     self,
     nixpkgs,
+    nixpkgs-stable,
     home-manager,
     darwin,
     darwin-emacs,

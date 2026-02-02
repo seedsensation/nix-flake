@@ -27,27 +27,27 @@
 
   # desktop apps, specifically for nixos
   desktop-software = with pkgs; [
-    #busybox
-    openttd
     brightnessctl
     firefox
     flameshot
     ghostty
+    gitFull
+    gnome-keyring
     grim
     hyprpaper
+    libGL
+    openjfx25
+    openttd
     playerctl
     prismlauncher
+    qpwgraph
     slurp
     spotify
+    tuxclocker
     vesktop
     wl-clipboard
     wofi
     wtype
-    qpwgraph
-    gnome-keyring
-    libGL
-    openjfx25
-    gitFull
   ];
 
   fonts = with pkgs; [
