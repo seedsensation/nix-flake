@@ -6,7 +6,6 @@ let
   package-groups = import ./packages.nix { inherit pkgs config inputs; };
 in
 {
-
   nix.settings.download-buffer-size = 5242888000; # 500MiB
   nixpkgs.config.allowUnfree = true;
 

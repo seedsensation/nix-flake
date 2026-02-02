@@ -77,21 +77,41 @@
     "emacs-flake": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-stable"
         ]
       },
       "locked": {
-        "lastModified": 1769780265,
-        "narHash": "sha256-OtxiqOUhFtO39VFvHnxg+vHGXvTVTCWfHRaJp6Wiuk0=",
+        "lastModified": 1770040752,
+        "narHash": "sha256-lvT4Ft+t6yYaU83n4+1UYRkroLiU90nw+VP2JilW73Q=",
         "owner": "seedsensation",
         "repo": "emacs-flake",
-        "rev": "cde980a719a2f91c5de096cc4d1d648cdb47a796",
+        "rev": "c45689ff539600d764f9b2dac4720764a6e0d229",
         "type": "github"
       },
       "original": {
         "owner": "seedsensation",
         "repo": "emacs-flake",
         "type": "github"
+      }
+    },
+    "emacs-flake-local": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-stable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1770043947,
+        "narHash": "sha256-NFszef3s6RBG49NaStEFg9ZUGfL9DeTcpapyBVPgrko=",
+        "ref": "refs/heads/main",
+        "rev": "6d18a879ee5230a2c54ade243340ba0e24d33e4a",
+        "revCount": 21,
+        "type": "git",
+        "url": "file:///home/mercury/projects/emacs-flake"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/mercury/projects/emacs-flake"
       }
     },
     "emacs-packages": {
@@ -638,6 +658,7 @@
         "darwin": "darwin",
         "darwin-emacs": "darwin-emacs",
         "emacs-flake": "emacs-flake",
+        "emacs-flake-local": "emacs-flake-local",
         "emacs-packages": "emacs-packages",
         "home-manager": "home-manager",
         "hy3": "hy3",
