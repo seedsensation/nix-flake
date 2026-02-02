@@ -26,12 +26,6 @@
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
-    #emacs-flake-local = {
-    #  url = "git+file:///home/mercury/projects/emacs-flake";
-    #  inputs.nixpkgs.follows = "nixpkgs-stable";
-    #};
- 
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,7 +56,6 @@
     darwin-emacs,
     emacs-packages,
     emacs-flake,
-    emacs-flake-local,
     hyprland,
     hyprland-plugins,
     hy3
@@ -132,7 +125,6 @@
       ./system-modules/enable-ssh.nix
       ./system-modules/razer.nix
       ./system-modules/remote-desktop.nix
-      { config.hasLocalEmacs = true; }
       ];
     };
 
