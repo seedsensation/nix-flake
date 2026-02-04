@@ -30,6 +30,7 @@
     brightnessctl
     firefox
     flameshot
+    gh
     ghostty
     gitFull
     gnome-keyring
