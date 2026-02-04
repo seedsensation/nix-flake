@@ -61,6 +61,7 @@
     hy3
   }: 
   let
+    # Code that will be run on every device I set up
     globalModules = [
       {
         system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -79,13 +80,9 @@
       }
       ./configuration.nix
       ./options.nix
-      {
-        home-manager.users.mercury.imports = [
-          ./options.nix
-        ];
-      }
     ];
 
+    # Code that will be run on every NixOS device I set up
     nixosModules = [
       home-manager.nixosModules.home-manager
       ./system-modules/nixos.nix
@@ -104,8 +101,10 @@
 
     ];
 
+    # home-manager code for every device
     homeModules = [
       ./home.nix
+      ./options.nix
       {home.file.".hushlogin".text = "";}
     ];
   in {

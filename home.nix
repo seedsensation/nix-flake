@@ -65,7 +65,14 @@ fastfetch
   };
 
   home.packages = [
-    (pkgs.writeShellScriptBin "eh"  "emacsclient -t $1")
+    (pkgs.writeShellScriptBin "eh" ''
+if [[ $INSIDE_EMACS == "vterm" ]]; then
+   echo "Nice try..."
+else
+   emacsclient -t $1
+fi
+''
+    )
     (pkgs.writeShellScriptBin "edit-emacs" "eh ~/nixos/modules/emacs/init.el")
     (pkgs.writeShellScriptBin "store-path" "nix eval nixpkgs#$1.outPath | tr -d '\"' | xargs")
   ];
