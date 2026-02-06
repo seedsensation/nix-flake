@@ -46,9 +46,12 @@
     spotify
     tuxclocker
     vesktop
+    wine
     wl-clipboard
     wofi
     wtype
+
+    (bottles.override { removeWarningPopup = true; })
   ];
 
   fonts = with pkgs; [
