@@ -46,6 +46,12 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak/?ref=latest";
+    };
+
+    foundryvtt.url = "github:reckenrode/nix-foundryvtt";
+
   };
   outputs = inputs@{
     self,
@@ -58,7 +64,9 @@
     emacs-flake,
     hyprland,
     hyprland-plugins,
-    hy3
+    hy3,
+    nix-flatpak,
+      foundryvtt
   }: 
   let
     # Code that will be run on every device I set up
@@ -91,7 +99,8 @@
       home-manager.users.mercury = {inputs, ...}: {
         imports = [
           inputs.hyprland.homeManagerModules.default
-          ./home-modules/hyprland.nix
+          ./home-modules/flatpaks.nix
+	  ./home-modules/hyprland.nix
         ] ++ homeModules;
       };
       home-manager.extraSpecialArgs = {
@@ -106,6 +115,7 @@
       ./home.nix
       ./options.nix
       {home.file.".hushlogin".text = "";}
+      nix-flatpak.homeManagerModules.nix-flatpak
     ];
   in {
 
@@ -124,6 +134,11 @@
       ./system-modules/enable-ssh.nix
       ./system-modules/razer.nix
       ./system-modules/remote-desktop.nix
+      ./system-modules/foundry.nix
+      ./home-modules/flatpaks.nix
+      nix-flatpak.nixosModules.nix-flatpak
+      foundryvtt.nixosModules.foundryvtt
+
       ];
     };
 

@@ -173,7 +173,7 @@
         "$mainMod, E, exec, $fileManager"
         "$mainMod SHIFT, space, togglefloating,"
         "$mainMod, space, exec, $menu"
-        "$mainMod, P, pseudo, # dwindle"
+        #"$mainMod, P, pseudo, # dwindle"
         "$mainMod, h, hy3:makegroup, h"
         "$mainMod, v, hy3:makegroup, v"
         "$mainMod, a, hy3:changefocus, raise"
@@ -202,7 +202,7 @@
         "$mainMod, Period, movewindow, mon:r"
         "$mainMod, Comma, movewindow, mon:l"
 
-        "$mainMod SHIFT, h, exec, killall -SIGUSR1 waybar"
+        "$mainMod SHIFT, h, exec, killall -SIGUSR1 -r 'waybar'"
 
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
@@ -211,6 +211,8 @@
         "$mainMod, mouse_up, workspace, e-1"
 
         "$mainMod, w, exec, emacsclient --eval '(thanos/type)'"
+
+        "$mainMod, e, exec, dolphin"
 
 
       ] ++ (

@@ -16,6 +16,7 @@
     llvm 
     maven
     neovim
+    netcat-gnu
     python3
     screen
     sqlite
@@ -36,14 +37,16 @@
     gnome-keyring
     grim
     hyprpaper
+    killall
     libGL
+    libreoffice
     openjfx25
     openttd
+    pavucontrol
     playerctl
     prismlauncher
     qpwgraph
     slurp
-    spotify
     tuxclocker
     vesktop
     wine
