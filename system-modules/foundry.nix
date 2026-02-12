@@ -2,14 +2,14 @@
 {
   services.foundryvtt = {
     enable = true;
-    hostname = "biggest-baby";
+    hostName = "82.4.129.3";
     minifyStaticFiles = true;
-    proxyPort = 443;
+    proxyPort = 30000;
     proxySSL = true;
     upnp = true;
 
     #dataDir = "/home/mercury/.local/share/FoundryVTT/";
 
-    package = inputs.foundryvtt.packages.${pkgs.system}.foundryvtt_12;
+    package = inputs.foundryvtt.packages.${pkgs.stdenv.hostPlatform.system}.foundryvtt_12;
   };
 }

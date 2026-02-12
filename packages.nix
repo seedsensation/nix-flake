@@ -98,6 +98,7 @@
     # rust
     rustc
     cargo
+    rustfmt
 
   ];
 
@@ -139,7 +140,8 @@
 
       ace-window
       avy
-      company
+      #company
+      corfu
       consult
       dash
       emacs-everywhere

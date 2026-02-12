@@ -23,6 +23,7 @@ in
 
   services.displayManager.ly = {
     enable = true;
+    package = pkgs-stable.ly;
     settings = {
       animation = "gameoflife";
       auto_login_session = "hyprland";

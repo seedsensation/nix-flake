@@ -27,6 +27,7 @@ in
       # spice it up a bit
       enableCompletion = true;
       autosuggestion.enable = true;
+      dotDir = "${config.xdg.configHome}/zsh";
       initContent = ''
 vterm_printf() {
     if [ -n "$TMUX" ] \
