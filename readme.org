@@ -1,0 +1,11 @@
+#+title: Nix Flake
+
+This is where the configuration for every desktop and laptop I own is stored.
+
+There are multiple configurations, for my NixOS desktop and laptop and also my Macbook, set up with Darwin.
+
+Any NixOS modules are stored in the =system-modules= folder, and Home Manager modules are stored in the =home-modules= folder.
+
+Everything is separated into individual modules, so they can be toggled on and off for specific devices very easily - specifically, many of the system modules should only be enabled on my desktop (primarily, FoundryVTT requires a valid license key and download).
+
+Thanks for reading :)

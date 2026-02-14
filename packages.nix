@@ -123,6 +123,7 @@
         wrapfig amsmath
         ulem hyperref
         capt-of
+        ec
         #(setq org-latex-compiler "lualatex")
         #(setq org-preview-latex-default-process 'dvisvgm)
       ]))
@@ -142,6 +143,7 @@
       avy
       #company
       corfu
+      corfu-terminal
       consult
       dash
       emacs-everywhere

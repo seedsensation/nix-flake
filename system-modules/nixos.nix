@@ -26,6 +26,7 @@ in
     package = pkgs-stable.ly;
     settings = {
       animation = "gameoflife";
+      auto_login_user = "mercury";
       auto_login_session = "hyprland";
       default_input = "login";
     };
