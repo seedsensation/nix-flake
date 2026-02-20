@@ -21,6 +21,7 @@
     screen
     sqlite
     tree
+    unzip
     vim
     ##jdk25_headless
     ##javaPackages.openjfx25
@@ -168,6 +169,7 @@
       org-roam
       org-roam-timestamps
       org-roam-ui
+      pdf-tools
       projectile
       rustic
       simple-httpd
