@@ -5,6 +5,7 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-legacy.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     darwin = {
       url = "github:nix-darwin/nix-darwin";
@@ -57,6 +58,7 @@
     self,
     nixpkgs,
     nixpkgs-stable,
+    nixpkgs-legacy,
     home-manager,
     darwin,
     darwin-emacs,
@@ -66,7 +68,7 @@
     hyprland-plugins,
     hy3,
     nix-flatpak,
-      foundryvtt
+    foundryvtt
   }: 
   let
     # Code that will be run on every device I set up
@@ -100,7 +102,7 @@
         imports = [
           inputs.hyprland.homeManagerModules.default
           ./home-modules/flatpaks.nix
-	  ./home-modules/hyprland.nix
+	        ./home-modules/hyprland.nix
         ] ++ homeModules;
       };
       home-manager.extraSpecialArgs = {
@@ -135,6 +137,7 @@
       ./system-modules/razer.nix
       ./system-modules/remote-desktop.nix
       ./system-modules/foundry.nix
+      #./system-modules/vr.nix
       ./home-modules/flatpaks.nix
       nix-flatpak.nixosModules.nix-flatpak
       foundryvtt.nixosModules.foundryvtt
