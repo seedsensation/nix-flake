@@ -32,20 +32,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    ################################################################
+    ### PINNED SPECIFIC VERSION OF HYPRLAND UNTIL HY3 IS PATCHED ###
+    ################################################################
 
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland?submodules=1&ref=v0.53.3";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     hy3 = {
-      url = "github:outfoxxed/hy3";
+      url = "github:outfoxxed/hy3?ref=hl0.53.0.1";
       inputs.hyprland.follows = "hyprland";
     };
+
+    ################################################################
+    ############## ONCE HY3 IS PATCHED, REMOVE &REF.. ##############
+    ################################################################
 
     nix-flatpak = {
       url = "github:gmodena/nix-flatpak/?ref=latest";
@@ -65,7 +68,7 @@
     emacs-packages,
     emacs-flake,
     hyprland,
-    hyprland-plugins,
+    #hyprland-plugins,
     hy3,
     nix-flatpak,
     foundryvtt
@@ -137,6 +140,7 @@
       ./system-modules/razer.nix
       ./system-modules/remote-desktop.nix
       ./system-modules/foundry.nix
+      ./system-modules/file-transfer.nix
       #./system-modules/vr.nix
       ./home-modules/flatpaks.nix
       nix-flatpak.nixosModules.nix-flatpak

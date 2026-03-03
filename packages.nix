@@ -1,4 +1,14 @@
 { pkgs, config, inputs, ... }:
+let
+  pkgs-legacy = import inputs.nixpkgs-legacy {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
+  pkgs-stable = import inputs.nixpkgs-stable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
+in
 {
   # stuff that wants to go system-wide on every device
   # primarily, things that i want to be able to use as sudo
@@ -35,6 +45,7 @@
     gh
     ghostty
     gitFull
+    godot
     gnome-keyring
     grim
     hyprpaper
@@ -48,7 +59,7 @@
     prismlauncher
     qpwgraph
     slurp
-    tuxclocker
+    #pkgs-stable.tuxclocker
     vesktop
     wine
     wl-clipboard
@@ -151,6 +162,7 @@
       evil
       f
       format-all
+      gdscript-mode
       git-gutter
       gruvbox-theme
       ivy
