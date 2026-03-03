@@ -7,6 +7,7 @@ let
 in
 {
   nix.settings.download-buffer-size = 5242888000; # 500MiB
+
   nixpkgs.config.allowUnfree = true;
 
 
