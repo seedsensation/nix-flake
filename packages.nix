@@ -50,6 +50,7 @@ in
     grim
     hyprpaper
     killall
+    krita
     libGL
     libreoffice
     openjfx25
