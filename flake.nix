@@ -38,12 +38,12 @@
 
     hyprland = {
       #url = "github:hyprwm/Hyprland?submodules=1&ref=v0.53.3";
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      url = "github:hyprwm/Hyprland?submodules=1&ref=v0.54.2";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hy3 = {
-      url = "github:outfoxxed/hy3";
+      url = "github:outfoxxed/hy3?ref=hl0.54.2";
       #url = "github:outfoxxed/hy3?ref=hl0.53.0.1";
       inputs.hyprland.follows = "hyprland";
     };

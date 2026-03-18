@@ -4,6 +4,10 @@ let
   pkgs-stable = import inputs.nixpkgs-stable {
     system = pkgs.stdenv.hostPlatform.system;
   };
+  pkgs-legacy = import inputs.nixpkgs-legacy {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
 in
 {
   users.mutableUsers = true;
@@ -23,12 +27,12 @@ in
 
   services.displayManager.ly = {
     enable = true;
-    package = pkgs-stable.ly;
+    package = pkgs.ly;
     settings = {
       animation = "gameoflife";
-      auto_login_user = "mercury";
-      auto_login_session = "hyprland";
-      default_input = "login";
+      #auto_login_user = "mercury";
+      #auto_login_session = "hyprland";
+      #default_input = "login";
     };
   };
 

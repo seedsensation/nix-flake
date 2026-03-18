@@ -40,6 +40,7 @@ in
   # desktop apps, specifically for nixos
   desktop-software = with pkgs; [
     brightnessctl
+    davinci-resolve
     firefox
     flameshot
     gh
@@ -60,12 +61,14 @@ in
     prismlauncher
     qpwgraph
     slurp
+    twitch-dl
     #pkgs-stable.tuxclocker
     vesktop
     wine
     wl-clipboard
     wofi
     wtype
+    yt-dlp
 
     (bottles.override { removeWarningPopup = true; })
   ];
