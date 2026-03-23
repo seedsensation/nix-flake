@@ -48,6 +48,7 @@ vterm_prompt_end() {
 setopt PROMPT_SUBST
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 fastfetch
+alias nix-shell="nix-shell --run 'zsh&&exit'"
 '';
       oh-my-zsh = {
       	enable = true;

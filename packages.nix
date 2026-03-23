@@ -14,6 +14,7 @@ in
   # primarily, things that i want to be able to use as sudo
   global-utils = with pkgs; [
     autoconf
+    clang-tools
     cmake
     cmatrix
     coreutils
@@ -27,6 +28,7 @@ in
     maven
     neovim
     netcat-gnu
+    openssl.dev
     python3
     screen
     sqlite
@@ -39,12 +41,13 @@ in
 
   # desktop apps, specifically for nixos
   desktop-software = with pkgs; [
+    alsa-plugins
     brightnessctl
     davinci-resolve
     firefox
     flameshot
     gh
-    ghostty
+    pkgs-stable.ghostty
     gitFull
     godot
     gnome-keyring
@@ -64,6 +67,7 @@ in
     twitch-dl
     #pkgs-stable.tuxclocker
     vesktop
+    vlc
     wine
     wl-clipboard
     wofi
