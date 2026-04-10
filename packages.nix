@@ -16,8 +16,10 @@ in
     autoconf
     clang-tools
     cmake
+    cmake-format
     cmatrix
     coreutils
+    doxygen
     fd
     fmt
     freetype
@@ -28,6 +30,7 @@ in
     maven
     neovim
     netcat-gnu
+    openssl
     openssl.dev
     python3
     screen
@@ -52,6 +55,7 @@ in
     godot
     gnome-keyring
     grim
+    handbrake
     hyprpaper
     killall
     krita
@@ -162,10 +166,12 @@ in
       ace-window
       avy
       #company
+      cmake-mode
       corfu
       corfu-terminal
       consult
       dash
+      doxymacs
       emacs-everywhere
       evil
       f
