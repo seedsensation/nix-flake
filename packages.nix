@@ -206,7 +206,8 @@ in
       treemacs
       treemacs-evil
       vertico
-      vterm
+      multi-vterm
+      #vterm
       websocket
       yaml-mode
     ];

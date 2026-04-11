@@ -17,7 +17,7 @@ in
   homebrew = { 
     enable = true;
     taps = [];
-    brews = [];
+    brews = [ "yt-dlp" ];
     casks = [];
   };
 }
