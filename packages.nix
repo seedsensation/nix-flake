@@ -176,6 +176,7 @@ in
       evil
       f
       format-all
+      fzf
       gdscript-mode
       git-gutter
       gruvbox-theme

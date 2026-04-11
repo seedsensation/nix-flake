@@ -1,6 +1,10 @@
 { config, pkgs, inputs, ... }:
 let
   package-groups = import ./packages.nix { inherit pkgs config inputs; };
+  pkgs-stable = import inputs.nixpkgs-stable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true;
+  };
 in
 {
   imports = [ 
@@ -9,12 +13,15 @@ in
   home.stateVersion = "25.11";
   programs.home-manager.enable = true;
 
-
   home.sessionVariables = {
     EDITOR = "emacsclient";
   };
 
   programs = {
+    ghostty = {
+      settings.shell-integration = "none";
+    };
+      
     # better search
     fzf = {
       enable = true;
