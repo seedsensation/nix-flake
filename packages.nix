@@ -46,6 +46,7 @@ in
   desktop-software = with pkgs; [
     alsa-plugins
     brightnessctl
+    ckan
     davinci-resolve
     firefox
     flameshot

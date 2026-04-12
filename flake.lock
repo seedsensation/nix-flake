@@ -81,11 +81,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775734777,
-        "narHash": "sha256-15XTDxzXb0TPW19xEwIlAtqe797Wv+/atgMFHiZxKTk=",
+        "lastModified": 1775918367,
+        "narHash": "sha256-Gebd8lQeRr4GrzQ31Y71bQj7vvSbOOUvDeUukd1u2sI=",
         "owner": "seedsensation",
         "repo": "emacs-flake",
-        "rev": "6d3d06f10b61431a43311630e5c514024f24db66",
+        "rev": "c227a70fa336ceaaaa61a0280f8f77b79c0afff1",
         "type": "github"
       },
       "original": {
