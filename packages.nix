@@ -32,7 +32,9 @@ in
     netcat-gnu
     openssl
     openssl.dev
+    pandoc
     python3
+    rustup
     screen
     sqlite
     tree
@@ -51,7 +53,7 @@ in
     firefox
     flameshot
     gh
-    pkgs-stable.ghostty
+    #pkgs-stable.ghostty
     gitFull
     godot
     gnome-keyring
@@ -64,6 +66,7 @@ in
     libreoffice
     openjfx25
     openttd
+    #niri
     pavucontrol
     playerctl
     prismlauncher
@@ -174,6 +177,7 @@ in
       dash
       doxymacs
       emacs-everywhere
+      envrc
       evil
       f
       format-all
@@ -181,10 +185,10 @@ in
       gdscript-mode
       git-gutter
       gruvbox-theme
+      inheritenv
       ivy
       ivy-prescient
       lsp-java
-      lsp-mode
       lsp-mode
       lsp-ui
       magit

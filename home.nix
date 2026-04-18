@@ -20,6 +20,8 @@ in
   programs = {
     ghostty = {
       settings.shell-integration = "none";
+      package = pkgs-stable.ghostty;
+      enable = true;
     };
       
     # better search
