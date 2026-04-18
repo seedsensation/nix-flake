@@ -45,7 +45,7 @@
       "$terminal" = "ghostty";
       "$menu" = "wofi --show drun";
 
-      monitor = "DP-1,preferred,0x0,auto";
+      monitor = "DP-1,preferred,0x0,1.3";
 
       exec-once = [
 	      "waybar & hyprpaper"
