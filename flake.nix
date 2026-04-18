@@ -36,17 +36,17 @@
     ### PINNED SPECIFIC VERSION OF HYPRLAND UNTIL HY3 IS PATCHED ###
     ################################################################
 
-    hyprland = {
-      #url = "github:hyprwm/Hyprland?submodules=1&ref=v0.53.3";
-      url = "github:hyprwm/Hyprland?submodules=1&ref=v0.54.2";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #hyprland = {
+    #  #url = "github:hyprwm/Hyprland?submodules=1&ref=v0.53.3";
+    #  url = "github:hyprwm/Hyprland?submodules=1&ref=v0.54.2";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
-    hy3 = {
-      url = "github:outfoxxed/hy3?ref=hl0.54.2";
-      #url = "github:outfoxxed/hy3?ref=hl0.53.0.1";
-      inputs.hyprland.follows = "hyprland";
-    };
+    #hy3 = {
+    #  url = "github:outfoxxed/hy3?ref=hl0.54.2";
+    #  #url = "github:outfoxxed/hy3?ref=hl0.53.0.1";
+    #  inputs.hyprland.follows = "hyprland";
+    #};
 
     ################################################################
     ############## ONCE HY3 IS PATCHED, REMOVE &REF.. ##############
@@ -69,9 +69,9 @@
     darwin-emacs,
     emacs-packages,
     emacs-flake,
-    hyprland,
+    #hyprland,
     #hyprland-plugins,
-    hy3,
+    #hy3,
     nix-flatpak,
     foundryvtt
   }: 
@@ -101,13 +101,15 @@
     nixosModules = [
       home-manager.nixosModules.home-manager
       ./system-modules/nixos.nix
+          ./system-modules/sway.nix
 
       { 
       home-manager.users.mercury = {inputs, ...}: {
         imports = [
-          inputs.hyprland.homeManagerModules.default
+          #inputs.hyprland.homeManagerModules.default
           ./home-modules/flatpaks.nix
-	        ./home-modules/hyprland.nix
+          ./home-modules/sway.nix
+	        #./home-modules/hyprland.nix
         ] ++ homeModules;
       };
       home-manager.extraSpecialArgs = {

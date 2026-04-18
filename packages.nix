@@ -53,7 +53,6 @@ in
     firefox
     flameshot
     gh
-    #pkgs-stable.ghostty
     gitFull
     godot
     gnome-keyring
@@ -64,9 +63,6 @@ in
     krita
     libGL
     libreoffice
-    openjfx25
-    openttd
-    #niri
     pavucontrol
     playerctl
     prismlauncher
@@ -77,12 +73,14 @@ in
     vesktop
     vlc
     wine
-    wl-clipboard
-    wofi
     wtype
     yt-dlp
 
     (bottles.override { removeWarningPopup = true; })
+
+    # sway requirements
+    mako
+    wl-clipboard
   ];
 
   fonts = with pkgs; [

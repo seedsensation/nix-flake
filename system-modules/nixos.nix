@@ -25,28 +25,35 @@ in
   };
   environment.pathsToLink = ["/share/applications" "/share/xdg-desktop-portal"];
 
-  services.displayManager.ly = {
+  services.displayManager.sddm = {
     enable = true;
-    package = pkgs.ly;
-    settings = {
-      animation = "gameoflife";
-      #auto_login_user = "mercury";
-      #auto_login_session = "hyprland";
-      #default_input = "login";
-    };
+    wayland.enable = true;
+    #wayland.compositor = "sway";
   };
+    
+  
+  #services.displayManager.ly = {
+  #  enable = true;
+  #  package = pkgs.ly;
+  #  settings = {
+  #    animation = "gameoflife";
+  #    #auto_login_user = "mercury";
+  #    #auto_login_session = "hyprland";
+  #    #default_input = "login";
+  #  };
+  #};
 
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
+  #nix.settings = {
+  #  substituters = ["https://hyprland.cachix.org"];
+  #  trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  #};
 
   programs = {
-    hyprland = {
-      enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    };
+    #hyprland = {
+    #  enable = true;
+    #  package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    #  portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    #};
 
     steam = {
       enable = true;
