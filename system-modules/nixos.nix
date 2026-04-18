@@ -118,16 +118,16 @@ in
       enable = true;
 
       #package = (pkgs.jdk25.override { enableJavaFX = true; });
-      package = (pkgs-stable.jdk25.overrideAttrs (old: {
-        enableJavaFX = true;
-        buildInputs = old.buildInputs ++ [pkgs.makeWrapper];
-        postFixup = ''
-          wrapProgram $out/bin/java \
-          --add-flags "--upgrade-module-path ${pkgs-stable.openjfx25}/lib --module-path ${pkgs.openjfx25}/lib"
-          wrapProgram $out/bin/javac \
-          --add-flags "--upgrade-module-path ${pkgs-stable.openjfx25}/lib --module-path ${pkgs.openjfx25}/lib"
-        '';
-      }));
+      #package = (pkgs-stable.jdk25.overrideAttrs (old: {
+      #  enableJavaFX = true;
+      #  buildInputs = old.buildInputs ++ [pkgs.makeWrapper];
+      #  postFixup = ''
+      #    wrapProgram $out/bin/java \
+      #    --add-flags "--upgrade-module-path ${pkgs-stable.openjfx25}/lib --module-path ${pkgs.openjfx25}/lib"
+      #    wrapProgram $out/bin/javac \
+      #    --add-flags "--upgrade-module-path ${pkgs-stable.openjfx25}/lib --module-path ${pkgs.openjfx25}/lib"
+      #  '';
+      #}));
     };
   };
   services = {
