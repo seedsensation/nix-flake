@@ -1,4 +1,9 @@
-{ pkgs, config, inputs, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 let
   pkgs-legacy = import inputs.nixpkgs-legacy {
     system = pkgs.stdenv.hostPlatform.system;
@@ -26,14 +31,14 @@ in
     gcc
     gd
     gnumake
-    llvm 
+    llvm
     maven
     neovim
     netcat-gnu
     openssl
     openssl.dev
     pandoc
-    python3
+
     rustup
     screen
     sqlite
@@ -42,6 +47,8 @@ in
     vim
     ##jdk25_headless
     ##javaPackages.openjfx25
+
+    python3
   ];
 
   # desktop apps, specifically for nixos
@@ -81,6 +88,7 @@ in
     # sway requirements
     mako
     wl-clipboard
+
   ];
 
   fonts = with pkgs; [
@@ -101,12 +109,11 @@ in
     qtsvg
   ];
 
-
   # userspace utilities on every device
   user-global = with pkgs; [
     # command line utils
     tree
-    
+
     # for nice looking zshrc
     fastfetch
 
@@ -145,82 +152,97 @@ in
     # LaTeX Packages
     (texliveBasic.withPackages (
       ps: with ps; [
-        dvisvgm dvipng
-        wrapfig amsmath
-        ulem hyperref
+        dvisvgm
+        dvipng
+        wrapfig
+        amsmath
+        ulem
+        hyperref
         capt-of
         ec
         #(setq org-latex-compiler "lualatex")
         #(setq org-preview-latex-default-process 'dvisvgm)
-      ]))
+      ]
+    ))
   ];
 
   #### EMACS PACKAGES ####
-  emacs = (pkgs.emacsWithPackagesFromUsePackage {
-    config = (builtins.readFile "${inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/custom.el");
-    defaultInitFile = false;
-    #package = pkgs.emacs;
-    alwaysEnsure = true;
-    #alwaysPin = "gnu";
-    #alwaysTangle = true;
-    extraEmacsPackages = epkgs: with epkgs; [
+  emacs = (
+    pkgs.emacsWithPackagesFromUsePackage {
+      config = (
+        builtins.readFile "${
+          inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
+        }/custom.el"
+      );
+      defaultInitFile = false;
+      #package = pkgs.emacs;
+      alwaysEnsure = true;
+      #alwaysPin = "gnu";
+      #alwaysTangle = true;
+      extraEmacsPackages =
+        epkgs: with epkgs; [
 
-      ace-window
-      avy
-      #company
-      cmake-mode
-      corfu
-      corfu-terminal
-      consult
-      dash
-      doxymacs
-      emacs-everywhere
-      envrc
-      evil
-      f
-      format-all
-      fzf
-      gdscript-mode
-      git-gutter
-      gruvbox-theme
-      inheritenv
-      ivy
-      ivy-prescient
-      lsp-java
-      lsp-mode
-      lsp-ui
-      magit
-      magit-section
-      marginalia
-      nix-mode
-      orderless
-      org
-      org-fragtog
-      org-roam
-      org-roam-timestamps
-      org-roam-ui
-      pdf-tools
-      projectile
-      rustic
-      simple-httpd
-      smartparens
-      sqlite3
-      surround
-      treemacs
-      treemacs-evil
-      vertico
-      multi-vterm
-      #vterm
-      websocket
-      yaml-mode
-    ];
-  });
+          ace-window
+          avy
+          #company
+          cmake-mode
+          corfu
+          corfu-terminal
+          consult
+          dash
+          doxymacs
+          emacs-everywhere
+          envrc
+          evil
+          f
+          format-all
+          fzf
+          gdscript-mode
+          git-gutter
+          gruvbox-theme
+          inheritenv
+          ivy
+          ivy-prescient
+          lsp-java
+          lsp-mode
+          lsp-ui
+          magit
+          magit-section
+          marginalia
+          nix-mode
+          orderless
+          org
+          org-fragtog
+          org-roam
+          org-roam-timestamps
+          org-roam-ui
+          pdf-tools
+          projectile
+          rustic
+          simple-httpd
+          smartparens
+          sqlite3
+          surround
+          treemacs
+          treemacs-evil
+          vertico
+          multi-vterm
+          #vterm
+          websocket
+          yaml-mode
+
+          # Jupyter Notebooks
+          jupyter
+          ein
+        ];
+    }
+  );
 
   nixos-scripts = [
     (pkgs.writeShellScriptBin "rebuild-nixos" "sudo nixos-rebuild switch")
-	  (pkgs.writeShellScriptBin "reload-nixos" "sudo nixos-rebuild test")
-	  (pkgs.writeShellScriptBin "reload-emacs" "sudo nixos-rebuild test && systemctl restart emacs --user")
-	  (pkgs.writeShellScriptBin "reload-nixos-trace" "sudo nixos-rebuild test --show-trace")
+    (pkgs.writeShellScriptBin "reload-nixos" "sudo nixos-rebuild test")
+    (pkgs.writeShellScriptBin "reload-emacs" "sudo nixos-rebuild test && systemctl restart emacs --user")
+    (pkgs.writeShellScriptBin "reload-nixos-trace" "sudo nixos-rebuild test --show-trace")
   ];
 
   darwin-scripts = [

@@ -41,22 +41,27 @@
       startup = [
         { command = "firefox"; }
       ];
-      keybindings = lib.mkOptionDefault {
-        "${modifier}+space" = "exec ${menu}";
-        "${modifier}+q" = "kill";
-        "${modifier}+z" = "exec emacsclient -ca ''";
-        "${modifier}+g" = "bar mode toggle";
+      keybindings =
+        let
+          screenshot = "exec grim -g \"$(slurp -d)\" - | wl-copy";
+        in
+        lib.mkOptionDefault {
+          "${modifier}+space" = "exec ${menu}";
+          "${modifier}+q" = "kill";
+          "${modifier}+z" = "exec emacsclient -ca ''";
+          "${modifier}+g" = "bar mode toggle";
+          "${modifier}+shift+s" = screenshot;
+          "Print" = screenshot;
 
-        "XF86AudioRaiseVolume" = "exec pactl set-sink-volume \@DEFAULT_SINK@ +5%";
-        "XF86AudioLowerVolume" = "exec pactl set-sink-volume \@DEFAULT_SINK@ -5%";
-        "XF86AudioPlay" = "exec playerctl play-pause";
-        "XF86AudioPause" = "exec playerctl play-pause";
-        "XF86AudioPrev" = "exec playerctl previous";
-        "XF86AudioNext" = "exec playerctl next";
-        "XF86AudioStop" = "exec playerctl stop";
+          "XF86AudioRaiseVolume" = "exec pactl set-sink-volume \@DEFAULT_SINK@ +5%";
+          "XF86AudioLowerVolume" = "exec pactl set-sink-volume \@DEFAULT_SINK@ -5%";
+          "XF86AudioPlay" = "exec playerctl play-pause";
+          "XF86AudioPause" = "exec playerctl play-pause";
+          "XF86AudioPrev" = "exec playerctl previous";
+          "XF86AudioNext" = "exec playerctl next";
+          "XF86AudioStop" = "exec playerctl stop";
 
-
-      };
+        };
       output.DP-1 = {
         scale = "1.25";
         #bg = "./dotfiles/wallpapers/landscape.png";
