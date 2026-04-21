@@ -20,9 +20,11 @@ in
 
   time.timeZone = "Europe/London";
 
-  environment.systemPackages = package-groups.global-utils;
+  environment.systemPackages = with package-groups; global-utils;
 
-  users.users.mercury.packages = with package-groups; emacs-deps ++ user-global ++ global-scripts;
+  users.users.mercury.packages =
+    with package-groups;
+    emacs-deps ++ user-global ++ global-scripts ++ latex-docs;
 
   #services.emacs = {
   #  enable = true;

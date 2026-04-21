@@ -36,25 +36,36 @@
       url = "github:gmodena/nix-flatpak/?ref=latest";
     };
 
+    jupyter = {
+      url = "github:kirelagin/jupyter.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     foundryvtt.url = "github:reckenrode/nix-foundryvtt";
 
   };
   outputs =
     inputs@{
       self,
+
+      # general setup
       nixpkgs,
-      nixpkgs-stable,
       nixpkgs-legacy,
+      nixpkgs-stable,
       home-manager,
+
+      # emacs
+      emacs-flake,
+      emacs-packages,
+
+      # nixos specific
+      foundryvtt,
+      jupyter,
+      nix-flatpak,
+
+      # macos
       darwin,
       darwin-emacs,
-      emacs-packages,
-      emacs-flake,
-      #hyprland,
-      #hyprland-plugins,
-      #hy3,
-      nix-flatpak,
-      foundryvtt,
     }:
     let
       # Code that will be run on every device I set up
@@ -85,8 +96,8 @@
       nixosModules = [
         home-manager.nixosModules.home-manager
         ./system-modules/nixos.nix
-        ./system-modules/sway.nix
-        #./system-modules/jupyter.nix
+        #./system-modules/sway.nix
+        ./system-modules/jupyter.nix
 
         {
           home-manager.users.mercury =

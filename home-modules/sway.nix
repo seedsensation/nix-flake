@@ -4,19 +4,12 @@
   lib,
   ...
 }:
-{
+rec {
 
-  wayland.windowManager.sway = {
+  xsession.windowManager.i3 = {
     enable = true;
-    wrapperFeatures.gtk = true;
-    config = rec {
+    config = lib.mkDefault rec {
       modifier = "Mod4";
-
-      left = "h";
-      down = "j";
-      right = "l";
-      up = "k";
-
       window.titlebar = false;
 
       colors =
@@ -35,7 +28,7 @@
           };
         };
 
-      menu = "wmenu-run";
+      menu = "dmenu_run";
 
       terminal = "ghostty";
       startup = [
@@ -62,11 +55,6 @@
           "XF86AudioStop" = "exec playerctl stop";
 
         };
-      output.DP-1 = {
-        scale = "1.25";
-        #bg = "./dotfiles/wallpapers/landscape.png";
-      };
-      input."*".xkb_layout = "gb";
 
       #extraConfig = ''
       #  input * {
@@ -74,6 +62,29 @@
       #  }
       #'';
     };
+  };
+
+  wayland.windowManager.sway = {
+    extraOptions = [ "--unsupported-gpu" ];
+    enable = true;
+    wrapperFeatures.gtk = true;
+    config = lib.mkMerge ([
+      xsession.windowManager.i3.config
+      {
+
+        left = "h";
+        down = "j";
+        right = "l";
+        up = "k";
+        input."*".xkb_layout = "gb";
+        output.DP-1 = {
+          scale = "1.25";
+          #bg = "./dotfiles/wallpapers/landscape.png";
+        };
+        menu = "wmenu-run";
+      }
+    ]);
+
   };
 
   services.mako = {

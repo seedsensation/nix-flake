@@ -37,7 +37,6 @@ in
     netcat-gnu
     openssl
     openssl.dev
-    pandoc
 
     rustup
     screen
@@ -88,6 +87,9 @@ in
     # sway requirements
     mako
     wl-clipboard
+    xdg-desktop-portal
+    xdg-desktop-portal-wlr
+    xdg-desktop-portal-gtk
 
   ];
 
@@ -135,6 +137,11 @@ in
 
   ];
 
+  latex-docs = with pkgs; [
+    texliveFull
+    pandoc
+  ];
+
   emacs-deps = with pkgs; [
     #(import ../emacs/emacs.nix { inherit pkgs; })
     rust-analyzer
@@ -150,20 +157,21 @@ in
     tree-sitter-grammars.tree-sitter-yaml
 
     # LaTeX Packages
-    (texliveBasic.withPackages (
-      ps: with ps; [
-        dvisvgm
-        dvipng
-        wrapfig
-        amsmath
-        ulem
-        hyperref
-        capt-of
-        ec
-        #(setq org-latex-compiler "lualatex")
-        #(setq org-preview-latex-default-process 'dvisvgm)
-      ]
-    ))
+    #(texliveBasic.withPackages (
+    #  ps: with ps; [
+    #    dvisvgm
+    #    dvipng
+    #    wrapfig
+    #    amsmath
+    #    ulem
+    #    hyperref
+    #    capt-of
+    #    ec
+    #    xelatex
+    #    #(setq org-latex-compiler "lualatex")
+    #    #(setq org-preview-latex-default-process 'dvisvgm)
+    #  ]
+    #))
   ];
 
   #### EMACS PACKAGES ####
