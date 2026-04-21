@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   package-groups = import ./packages.nix { inherit pkgs config inputs; };
   pkgs-stable = import inputs.nixpkgs-stable {
@@ -7,7 +12,7 @@ let
   };
 in
 {
-  imports = [ 
+  imports = [
     ./home-modules/git.nix
   ];
   home.stateVersion = "25.11";
@@ -18,12 +23,13 @@ in
   };
 
   programs = {
+    bottom.enable = true;
     ghostty = {
       settings.shell-integration = "none";
       package = pkgs-stable.ghostty;
       enable = true;
     };
-      
+
     # better search
     fzf = {
       enable = true;
@@ -38,30 +44,30 @@ in
       autosuggestion.enable = true;
       dotDir = "${config.xdg.configHome}/zsh";
       initContent = ''
-vterm_printf() {
-    if [ -n "$TMUX" ] \
-        && { [ "''${TERM%%-*}" = "tmux" ] \
-            || [ "''${TERM%%-*}" = "screen" ]; }; then
-        # Tell tmux to pass the escape sequences through
-        printf "\ePtmux;\e\e]%s\007\e\\" "$1"
-    elif [ "''${TERM%%-*}" = "screen" ]; then
-        # GNU screen (screen, screen-256color, screen-256color-bce)
-        printf "\eP\e]%s\007\e\\" "$1"
-    else
-        printf "\e]%s\e\\" "$1"
-    fi
-}
-vterm_prompt_end() {
-    vterm_printf "51;A$(whoami)@$(hostname):$(pwd)"
-}
-setopt PROMPT_SUBST
-PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
-fastfetch
-alias nix-shell="nix-shell --run 'zsh&&exit'"
-'';
+        vterm_printf() {
+            if [ -n "$TMUX" ] \
+                && { [ "''${TERM%%-*}" = "tmux" ] \
+                    || [ "''${TERM%%-*}" = "screen" ]; }; then
+                # Tell tmux to pass the escape sequences through
+                printf "\ePtmux;\e\e]%s\007\e\\" "$1"
+            elif [ "''${TERM%%-*}" = "screen" ]; then
+                # GNU screen (screen, screen-256color, screen-256color-bce)
+                printf "\eP\e]%s\007\e\\" "$1"
+            else
+                printf "\e]%s\e\\" "$1"
+            fi
+        }
+        vterm_prompt_end() {
+            vterm_printf "51;A$(whoami)@$(hostname):$(pwd)"
+        }
+        setopt PROMPT_SUBST
+        PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
+        fastfetch
+        alias nix-shell="nix-shell --run 'zsh&&exit'"
+      '';
       oh-my-zsh = {
-      	enable = true;
-	theme = "jonathan";
+        enable = true;
+        theme = "jonathan";
       };
     };
     emacs = {
@@ -77,22 +83,24 @@ alias nix-shell="nix-shell --run 'zsh&&exit'"
 
   home.packages = [
     (pkgs.writeShellScriptBin "eh" ''
-if [[ $INSIDE_EMACS == "vterm" ]]; then
-   echo "Nice try..."
-else
-   emacsclient -t $1
-fi
-''
-    )
+      if [[ $INSIDE_EMACS == "vterm" ]]; then
+         echo "Nice try..."
+      else
+         emacsclient -t $1
+      fi
+    '')
     (pkgs.writeShellScriptBin "edit-emacs" "eh ~/nixos/modules/emacs/init.el")
     (pkgs.writeShellScriptBin "store-path" "nix eval nixpkgs#$1.outPath | tr -d '\"' | xargs")
   ];
 
   #xdg.configFile."emacs".source = ./emacs;
-  
-  home.file.".emacs.d/init.elc".source   = config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/init.elc";
-  home.file.".emacs.d/readme.el".source = config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/readme.el";
 
+  home.file.".emacs.d/init.elc".source = config.lib.file.mkOutOfStoreSymlink "${
+    inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
+  }/init.elc";
+  home.file.".emacs.d/readme.el".source = config.lib.file.mkOutOfStoreSymlink "${
+    inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
+  }/readme.el";
 
   #home.file.".emacs.d/init.elc".source =
   #  if (config.hasLocalEmacs)
@@ -103,5 +111,5 @@ fi
   #  if (config.hasLocalEmacs)
   #  then config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake-local.packages.${pkgs.stdenv.hostPlatform.system}.default}/readme.el"
   #  else config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake-local.packages.${pkgs.stdenv.hostPlatform.system}.default}/readme.el";
-    #else config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/readme.el";
+  #else config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/readme.el";
 }

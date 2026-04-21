@@ -32,9 +32,11 @@ in
             pkgs.python3.withPackages (
               pythonPackages: with pythonPackages; [
                 ipykernel
-                pandas
+
                 matplotlib
+                pandas
                 scikit-learn
+                seaborn
               ]
             )
           );
