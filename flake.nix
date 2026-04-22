@@ -41,6 +41,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     foundryvtt.url = "github:reckenrode/nix-foundryvtt";
 
   };
@@ -62,6 +67,7 @@
       foundryvtt,
       jupyter,
       nix-flatpak,
+      stylix,
 
       # macos
       darwin,
@@ -89,12 +95,14 @@
           nixpkgs.overlays = [ emacs-packages.overlays.emacs ];
         }
         ./configuration.nix
+        ./system-modules/stylix.nix
         ./options.nix
       ];
 
       # Code that will be run on every NixOS device I set up
       nixosModules = [
         home-manager.nixosModules.home-manager
+        stylix.nixosModules.stylix
         ./system-modules/nixos.nix
         #./system-modules/sway.nix
         ./system-modules/jupyter.nix
@@ -107,6 +115,7 @@
                 #inputs.hyprland.homeManagerModules.default
                 ./home-modules/flatpaks.nix
                 ./home-modules/sway.nix
+                ./home-modules/kitty.nix
                 #./home-modules/hyprland.nix
               ]
               ++ homeModules;
@@ -173,6 +182,7 @@
         system = "aarch64-darwin";
         modules = globalModules ++ [
           home-manager.darwinModules.home-manager
+          stylix.darwinModules.stylix
           ./system-modules/darwin.nix
           {
             nixpkgs.overlays = [ darwin-emacs.overlays.emacs ];

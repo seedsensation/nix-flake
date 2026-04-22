@@ -58,6 +58,7 @@ in
     davinci-resolve
     firefox
     flameshot
+    gamescope
     gh
     gitFull
     godot
