@@ -82,6 +82,7 @@
             "nix-command"
             "flakes"
           ];
+          # enable home manager
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
@@ -92,26 +93,35 @@
             backupFileExtension = ".bak";
           };
 
+          # set up emacs with packages
           nixpkgs.overlays = [ emacs-packages.overlays.emacs ];
         }
+
+        # basic config for every device
         ./configuration.nix
+
+        # theming
         ./system-modules/stylix.nix
-        ./options.nix
       ];
 
       # Code that will be run on every NixOS device I set up
       nixosModules = [
+        # modules for specific flakes
         home-manager.nixosModules.home-manager
+        nix-flatpak.nixosModules.nix-flatpak
         stylix.nixosModules.stylix
+
+        # basic nixos setup + sway window manager
         ./system-modules/nixos.nix
         ./system-modules/sway.nix
-        ./system-modules/jupyter.nix
 
+        # home manager modules
         {
           home-manager.users.mercury =
             { inputs, ... }:
             {
               imports = [
+                # more granular nixos setup using home-manager
                 ./home-modules/nixos.nix
                 ./home-modules/sway.nix
                 ./home-modules/kitty.nix
@@ -125,10 +135,9 @@
 
       ];
 
-      # home-manager code for every device
+      # home-manager modules for every device
       homeModules = [
         ./home.nix
-        ./options.nix
         { home.file.".hushlogin".text = ""; }
         nix-flatpak.homeManagerModules.nix-flatpak
       ];
@@ -143,20 +152,22 @@
           globalModules
           ++ nixosModules
           ++ [
+            foundryvtt.nixosModules.foundryvtt
+
             # Device specific configs
             ./system-modules/device-info/biggest-baby.nix
 
             # Modules to enable
-            ./system-modules/docker.nix
             ./system-modules/enable-ssh.nix
             ./system-modules/razer.nix
             ./system-modules/remote-desktop.nix
             ./system-modules/foundry.nix
-            ./system-modules/file-transfer.nix
-            #./system-modules/vr.nix
-            #./home-modules/flatpaks.nix
-            nix-flatpak.nixosModules.nix-flatpak
-            foundryvtt.nixosModules.foundryvtt
+
+            # Specific modules for specific tasks
+            #  Comment a module out to disable it
+            ./system-modules/jupyter.nix
+            #./system-modules/file-transfer.nix
+            #./system-modules/docker.nix
 
           ];
       };

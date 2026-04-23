@@ -102,14 +102,4 @@ in
     inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
   }/readme.el";
 
-  #home.file.".emacs.d/init.elc".source =
-  #  if (config.hasLocalEmacs)
-  #  then config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake-local.packages.${pkgs.stdenv.hostPlatform.system}.default}/init.elc"
-  #  else config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/init.elc";
-
-  #home.file.".emacs.d/readme.el".source =
-  #  if (config.hasLocalEmacs)
-  #  then config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake-local.packages.${pkgs.stdenv.hostPlatform.system}.default}/readme.el"
-  #  else config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake-local.packages.${pkgs.stdenv.hostPlatform.system}.default}/readme.el";
-  #else config.lib.file.mkOutOfStoreSymlink "${inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default}/readme.el";
 }
