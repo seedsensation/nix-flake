@@ -1,4 +1,9 @@
-{pkgs, inputs, config, ...}:
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
 let
   package-groups = import ../packages.nix { inherit pkgs config inputs; };
   pkgs-stable = import inputs.nixpkgs-stable {
@@ -11,27 +16,36 @@ let
 in
 {
   users.mutableUsers = true;
-  
+
   users.users.mercury = {
     isNormalUser = true;
     name = "mercury";
     home = "/home/mercury";
     shell = pkgs.zsh;
-    extraGroups = ["wheel"];
-    packages = with package-groups; 
-      desktop-software ++
-      kde-stuff ++
-      nixos-scripts;
+    extraGroups = [ "wheel" ];
+    packages = with package-groups; desktop-software ++ kde-stuff ++ nixos-scripts;
   };
-  environment.pathsToLink = ["/share/applications" "/share/xdg-desktop-portal"];
+  environment.pathsToLink = [
+    "/share/applications"
+    "/share/xdg-desktop-portal"
+  ];
 
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    #wayland.compositor = "sway";
+  services.displayManager = {
+    defaultSession = "sway";
+    sddm = {
+      enable = true;
+      #wayland.enable = true;
+      theme = "sddm-personal";
+      package = pkgs.kdePackages.sddm;
+      extraPackages = with pkgs.kdePackages; [
+        qt5compat
+        qtdeclarative
+        qtsvg
+      ];
+      #wayland.compositor = "kwin";
+    };
   };
-    
-  
+
   #services.displayManager.ly = {
   #  enable = true;
   #  package = pkgs.ly;
@@ -70,11 +84,10 @@ in
   };
 
   hardware.graphics.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = false;
 
   networking.networkmanager.enable = true;
-
 
   services.printing.enable = true;
 
@@ -86,14 +99,11 @@ in
 
   services.libinput.enable = true;
 
-
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 2;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
 
   console = {
     font = "Lat2-Terminus16";
@@ -110,11 +120,11 @@ in
         init.defaultBranch = "main";
         url = {
           "https://github.com/" = {
-	          insteadOf = [
-	            "gh:"
-	            "github:"
-	          ];
-	        };
+            insteadOf = [
+              "gh:"
+              "github:"
+            ];
+          };
           "https://olympus.ntu.ac.uk/".insteadOf = [ "ol:" ];
         };
         user.name = "Mercury";

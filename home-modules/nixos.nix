@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   config,
   inputs,
@@ -14,7 +15,7 @@
   xdg.portal = {
     enable = true;
     config.sway = {
-      default = [
+      default = lib.mkDefault [
         "gtk"
         "wlr"
         "gnome"
@@ -25,7 +26,5 @@
       xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
     ];
-
   };
-
 }

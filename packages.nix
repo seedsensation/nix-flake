@@ -76,7 +76,6 @@ in
     qpwgraph
     slurp
     twitch-dl
-    #pkgs-stable.tuxclocker
     vesktop
     vlc
     wine
@@ -88,9 +87,10 @@ in
     # sway requirements
     mako
     wl-clipboard
+    wmenu
     xdg-desktop-portal
-    xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
+    xdg-desktop-portal-wlr
 
   ];
 

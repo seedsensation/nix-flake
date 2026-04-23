@@ -40,7 +40,7 @@ let
               childBorder = "${purple}";
             };
           };
-        terminal = "ghostty";
+        terminal = "kitty";
         startup = [
           { command = "firefox"; }
         ];

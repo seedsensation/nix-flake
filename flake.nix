@@ -104,7 +104,7 @@
         home-manager.nixosModules.home-manager
         stylix.nixosModules.stylix
         ./system-modules/nixos.nix
-        #./system-modules/sway.nix
+        ./system-modules/sway.nix
         ./system-modules/jupyter.nix
 
         {
@@ -112,11 +112,9 @@
             { inputs, ... }:
             {
               imports = [
-                #inputs.hyprland.homeManagerModules.default
-                ./home-modules/flatpaks.nix
+                ./home-modules/nixos.nix
                 ./home-modules/sway.nix
                 ./home-modules/kitty.nix
-                #./home-modules/hyprland.nix
               ]
               ++ homeModules;
             };
@@ -156,7 +154,7 @@
             ./system-modules/foundry.nix
             ./system-modules/file-transfer.nix
             #./system-modules/vr.nix
-            ./home-modules/flatpaks.nix
+            #./home-modules/flatpaks.nix
             nix-flatpak.nixosModules.nix-flatpak
             foundryvtt.nixosModules.foundryvtt
 
