@@ -35,4 +35,6 @@ in
 
   fonts.packages = package-groups.fonts;
 
+  environment.variables.PATH = "${pkgs.clang-tools}/bin:$PATH";
+
 }

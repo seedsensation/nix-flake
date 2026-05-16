@@ -55,4 +55,14 @@
     };
   };
 
+  hardware.nvidia = {
+    powerManagement = {
+      enable = true;
+      #finegrained = true;
+    };
+    modesetting.enable = true;
+  };
+
+  services.lact.enable = true;
+
 }

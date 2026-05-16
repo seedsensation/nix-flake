@@ -122,6 +122,7 @@
             {
               imports = [
                 # more granular nixos setup using home-manager
+                ./home-modules/flatpaks.nix
                 ./home-modules/nixos.nix
                 ./home-modules/sway.nix
                 ./home-modules/kitty.nix
@@ -162,6 +163,7 @@
             ./system-modules/razer.nix
             ./system-modules/remote-desktop.nix
             ./system-modules/foundry.nix
+            ./home-modules/flatpaks.nix
 
             # Specific modules for specific tasks
             #  Comment a module out to disable it

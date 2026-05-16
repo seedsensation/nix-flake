@@ -15,10 +15,13 @@ let
   };
 in
 {
+
   # stuff that wants to go system-wide on every device
   # primarily, things that i want to be able to use as sudo
   global-utils = with pkgs; [
     autoconf
+    nasmfmt
+    asm-lsp
     clang-tools
     cmake
     cmake-format
@@ -33,6 +36,7 @@ in
     gnumake
     llvm
     maven
+    nasm
     neovim
     netcat-gnu
     openssl
@@ -40,6 +44,7 @@ in
 
     rustup
     screen
+    #semgrep
     sqlite
     tree
     unzip
@@ -53,6 +58,7 @@ in
   # desktop apps, specifically for nixos
   desktop-software = with pkgs; [
     alsa-plugins
+    audacity
     brightnessctl
     ckan
     davinci-resolve
@@ -74,6 +80,7 @@ in
     playerctl
     prismlauncher
     qpwgraph
+    scrot
     slurp
     twitch-dl
     vesktop
@@ -139,7 +146,7 @@ in
   ];
 
   latex-docs = with pkgs; [
-    texliveFull
+    #texliveFull
     pandoc
   ];
 
@@ -157,27 +164,30 @@ in
     astyle
     tree-sitter-grammars.tree-sitter-yaml
 
-    # LaTeX Packages
-    #(texliveBasic.withPackages (
-    #  ps: with ps; [
-    #    dvisvgm
-    #    dvipng
-    #    wrapfig
-    #    amsmath
-    #    ulem
-    #    hyperref
-    #    capt-of
-    #    ec
-    #    xelatex
-    #    #(setq org-latex-compiler "lualatex")
-    #    #(setq org-preview-latex-default-process 'dvisvgm)
-    #  ]
-    #))
+    #LaTeX Packages
+    (texliveFull.withPackages (
+      ps: with ps; [
+        dvisvgm
+        dvipng
+        wrapfig
+        amsmath
+        ulem
+        hyperref
+        capt-of
+        ec
+        lastpage
+        fancyhdr
+        #xelatex
+        #(setq org-latex-compiler "lualatex")
+        #(setq org-preview-latex-default-process 'dvisvgm)
+      ]
+    ))
   ];
 
   #### EMACS PACKAGES ####
   emacs = (
     pkgs.emacsWithPackagesFromUsePackage {
+      package = pkgs.emacs-git;
       config = (
         builtins.readFile "${
           inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -225,6 +235,7 @@ in
           org-roam
           org-roam-timestamps
           org-roam-ui
+          ox-gfm
           pdf-tools
           projectile
           rustic

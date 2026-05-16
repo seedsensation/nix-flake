@@ -16,6 +16,12 @@ let
 in
 {
   users.mutableUsers = true;
+  services.flatpak = {
+    enable = true;
+    packages = [
+      "com.spotify.Client"
+    ];
+  };
 
   users.users.mercury = {
     isNormalUser = true;
@@ -29,6 +35,14 @@ in
     "/share/applications"
     "/share/xdg-desktop-portal"
   ];
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc
+      editline
+    ];
+  };
 
   services.displayManager = {
     defaultSession = "sway";
@@ -153,6 +167,17 @@ in
       package = pkgs.mariadb;
     };
   };
+
+  environment.systemPackages =
+    let
+      application-menu = pkgs.runCommandLocal "xdg-application-menu" { } ''
+        mkdir -p $out/etc/xdg/menus/
+        ln -s ${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu $out/etc/xdg/menus/applications.menu
+      '';
+    in
+    [
+      application-menu
+    ];
 
   system.stateVersion = "25.11";
 }

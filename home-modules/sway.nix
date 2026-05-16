@@ -46,14 +46,20 @@ let
         ];
         keybindings =
           let
-            screenshot = "exec grim -g \"$(slurp -d)\" - | wl-copy";
+            screenshot =
+              if (wm == "sway") then
+                "exec grim -g \"$(slurp -d)\" - | wl-copy"
+              else
+                "exec scrot -s -e 'xclip -selection clipboard -t image/png -i $f'";
           in
           lib.mkOptionDefault {
             "${modifier}+space" = "exec ${menu}";
             "${modifier}+q" = "kill";
             "${modifier}+z" = "exec emacsclient -ca ''";
             "${modifier}+g" = "bar mode toggle";
+            "${modifier}+e" = "exec dolphin";
             "${modifier}+shift+s" = screenshot;
+            "${modifier}+p" = "sticky toggle";
             "Print" = screenshot;
 
             "XF86AudioRaiseVolume" = "exec pactl set-sink-volume \@DEFAULT_SINK@ +5%";
