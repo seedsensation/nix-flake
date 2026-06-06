@@ -48,6 +48,8 @@
 
     foundryvtt.url = "github:reckenrode/nix-foundryvtt";
 
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+
   };
   outputs =
     inputs@{
@@ -72,6 +74,7 @@
       # macos
       darwin,
       darwin-emacs,
+      nix-minecraft,
     }:
     let
       # Code that will be run on every device I set up
@@ -163,13 +166,14 @@
             ./system-modules/razer.nix
             ./system-modules/remote-desktop.nix
             ./system-modules/foundry.nix
+            ./system-modules/minecraft.nix
             ./home-modules/flatpaks.nix
 
             # Specific modules for specific tasks
             #  Comment a module out to disable it
             ./system-modules/jupyter.nix
             #./system-modules/file-transfer.nix
-            #./system-modules/docker.nix
+            ./system-modules/docker.nix
 
           ];
       };

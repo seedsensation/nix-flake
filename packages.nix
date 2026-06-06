@@ -76,6 +76,7 @@ in
     krita
     libGL
     libreoffice
+    obs-studio
     pavucontrol
     playerctl
     prismlauncher
@@ -89,7 +90,7 @@ in
     wtype
     yt-dlp
 
-    (bottles.override { removeWarningPopup = true; })
+    #(bottles.override { removeWarningPopup = true; })
 
     # sway requirements
     mako
@@ -139,8 +140,8 @@ in
     toilet
 
     # rust
-    rustc
-    cargo
+    #rustc
+    #cargo
     rustfmt
 
   ];
@@ -187,7 +188,7 @@ in
   #### EMACS PACKAGES ####
   emacs = (
     pkgs.emacsWithPackagesFromUsePackage {
-      package = pkgs.emacs-git;
+      #package = pkgs.emacs-git;
       config = (
         builtins.readFile "${
           inputs.emacs-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -272,5 +273,6 @@ in
   global-scripts = [
     (pkgs.writeShellScriptBin "speak" "toilet \"$1\" | cowsay -rn | lolcat")
     (pkgs.writeShellScriptBin "actually" "toilet \"$1\" | cowsay -rf actually -n | lolcat")
+    (pkgs.writeShellScriptBin "mp4-to-mov" "ffmpeg -i \"$1\" -c:v libxvid -c:a libmp3lame -q:v 4 -q:a 2 \"$2\" </dev/tty")
   ];
 }
