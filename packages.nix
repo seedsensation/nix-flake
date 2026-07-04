@@ -76,10 +76,11 @@ in
     krita
     libGL
     libreoffice
-    obs-studio
     pavucontrol
     playerctl
-    prismlauncher
+    (prismlauncher.override {
+      #additionalLibs = [ libvlc ];
+    })
     qpwgraph
     scrot
     slurp
@@ -97,7 +98,9 @@ in
     wl-clipboard
     wmenu
     xdg-desktop-portal
+    xdg-desktop-portal-gnome
     xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
 
   ];

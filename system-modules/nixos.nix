@@ -36,14 +36,6 @@ in
     "/share/xdg-desktop-portal"
   ];
 
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      stdenv.cc.cc
-      editline
-    ];
-  };
-
   services.displayManager = {
     defaultSession = "sway";
     sddm = {
@@ -58,6 +50,15 @@ in
       ];
       #wayland.compositor = "kwin";
     };
+  };
+
+  xdg.portal = {
+    xdgOpenUsePortal = true;
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+    ];
   };
 
   #services.displayManager.ly = {
@@ -83,6 +84,18 @@ in
     #  portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     #};
 
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+        editline
+      ];
+    };
+
+    obs-studio = {
+      enable = true;
+      enableVirtualCamera = true;
+    };
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
@@ -128,6 +141,11 @@ in
   i18n.defaultLocale = "en_GB.UTF-8";
 
   programs = {
+    appimage = {
+      enable = true;
+      binfmt = true;
+      package = pkgs.appimage-run;
+    };
     git = {
       enable = true;
       config = {
