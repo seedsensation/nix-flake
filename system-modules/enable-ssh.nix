@@ -1,4 +1,9 @@
-{pkgs, config, inputs, ...}:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 let
   package-groups = import ../packages.nix { inherit pkgs config inputs; };
 in
@@ -13,7 +18,13 @@ in
       PasswordAuthentication = true;
       PermitRootLogin = "no";
       KbdInteractiveAuthentication = true;
+      AllowUsers = [ "mercury" ];
     };
+    ports = [
+      22
+      25525
+    ];
+    openFirewall = true;
   };
 
   security.pam.services.sshd.googleAuthenticator = {
@@ -21,6 +32,18 @@ in
     allowNullOTP = true;
   };
 
-  networking.firewall.allowedTCPPorts = [ 22  25522 25525 ];
-  networking.firewall.allowedUDPPorts = [ 9 ];
+  networking = {
+    nftables.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        22
+        25525
+      ];
+      allowedUDPPorts = [
+        9
+        25525
+      ];
+    };
+  };
 }

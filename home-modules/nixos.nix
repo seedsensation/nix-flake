@@ -14,6 +14,7 @@
   };
   xdg.portal = {
     enable = true;
+    xdgOpenUsePortal = true;
     config.sway = {
       default = lib.mkDefault [
         "gtk"
@@ -22,6 +23,7 @@
       ];
     };
     extraPortals = with pkgs; [
+      kdePackages.xdg-desktop-portal-kde
       xdg-desktop-portal
       xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk

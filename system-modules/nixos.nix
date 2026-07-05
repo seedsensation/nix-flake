@@ -36,13 +36,14 @@ in
     "/share/xdg-desktop-portal"
   ];
 
+  services.desktopManager.plasma6.enable = true;
   services.displayManager = {
     defaultSession = "sway";
     sddm = {
       enable = true;
       #wayland.enable = true;
       theme = "sddm-personal";
-      package = pkgs.kdePackages.sddm;
+      #package = pkgs.kdePackages.sddm;
       extraPackages = with pkgs.kdePackages; [
         qt5compat
         qtdeclarative
@@ -52,14 +53,14 @@ in
     };
   };
 
-  xdg.portal = {
-    xdgOpenUsePortal = true;
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
-    ];
-  };
+  #xdg.portal = {
+  #  xdgOpenUsePortal = true;
+  #  enable = true;
+  #  extraPortals = [
+  #    pkgs.xdg-desktop-portal-wlr
+  #    pkgs.kdePackages.xdg-desktop-portal-kde
+  #  ];
+  #};
 
   #services.displayManager.ly = {
   #  enable = true;
