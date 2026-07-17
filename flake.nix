@@ -93,7 +93,7 @@
             extraSpecialArgs = {
               inherit inputs;
             };
-            backupFileExtension = ".bak";
+            backupFileExtension = "bak";
           };
 
           # set up emacs with packages
@@ -129,6 +129,7 @@
                 ./home-modules/nixos.nix
                 ./home-modules/sway.nix
                 ./home-modules/kitty.nix
+                ./home-modules/godot.nix
               ]
               ++ homeModules;
             };

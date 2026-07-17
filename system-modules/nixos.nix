@@ -88,8 +88,29 @@ in
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
+        libxcb
+        dbus
+        pkg-config
         stdenv.cc.cc
         editline
+        alsa-lib
+        libGL
+        vulkan-loader
+        libX11
+        libXcursor
+        libXext
+        libXfixes
+        libXi
+        libXinerama
+        libxkbcommon
+        libXrandr
+        libXrender
+        libdecor
+        wayland
+        dbus
+        dbus.lib
+        fontconfig
+        fontconfig.lib
       ];
     };
 

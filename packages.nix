@@ -20,6 +20,7 @@ in
   # primarily, things that i want to be able to use as sudo
   global-utils = with pkgs; [
     autoconf
+    bacon
     nasmfmt
     asm-lsp
     clang-tools
@@ -227,7 +228,6 @@ in
           ivy
           ivy-prescient
           lsp-java
-          lsp-mode
           lsp-ui
           magit
           magit-section
@@ -258,6 +258,10 @@ in
           # Jupyter Notebooks
           jupyter
           ein
+
+          lsp-mode
+
+          yasnippet
         ];
     }
   );
